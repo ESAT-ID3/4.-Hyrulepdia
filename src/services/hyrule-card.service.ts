@@ -81,6 +81,7 @@ export const getRandomHyruleData = async( num : number = 3, chestRarity: 'common
             name: item.name,
             image: item.image,
             description: trimmedDescription,
+            fullDescription: item.description,
             location: trimmedLocations, //une las locations, si no hay pone unknown
             items: trimmedDrops,
             category: item.category as HyruleCardType['category'],

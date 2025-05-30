@@ -5,7 +5,7 @@ export interface HyruleCardType {
     rarity: 'common' | 'rare' | 'epic';
     image: string;
     description: string;
-    fullDescription: string;
+    fullDescription?: string;
     location: string;
     items: string;
     category: 'creatures' | 'materials' | 'equipment' | 'monsters' | 'treasure';

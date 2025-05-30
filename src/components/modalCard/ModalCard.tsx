@@ -18,7 +18,6 @@ interface ModalCardProps {
 export const ModalCard: FC<ModalCardProps> = ({
   selectedCard,
   onClose,
-  favoriteIds = [],
   onRemoveFavorite,
 }) => {
   const [showZoomedCard, setShowZoomedCard] = useState(false);
