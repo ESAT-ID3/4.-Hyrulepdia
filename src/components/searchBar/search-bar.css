@@ -28,6 +28,14 @@
     width: 568px;
 }
 
+    @media (max-width: 1400px) {
+        .search-bar {
+            width: 230px;
+        }
+    }
+
+
+
 .search-bar.outlined::before {
     background-image: none;
 }

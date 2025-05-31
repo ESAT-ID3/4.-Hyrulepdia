@@ -23,6 +23,11 @@
   color: white;
 }
 
+.modal-description h2 {
+  display: flex;
+  margin-bottom: 6px;
+}
+
 .modal-content__text-btn > h1 {
   font-size: 44px;
   color: white;

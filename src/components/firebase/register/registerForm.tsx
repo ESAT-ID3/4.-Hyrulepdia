@@ -1,8 +1,10 @@
-import React, { useState, FormEvent, ChangeEvent, FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, FormEvent, FC } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import './registerForm.css';
 import { Button } from '../../button/button';
 import { useAuth } from '../../../context/authContext';
+import { SearchBar } from '../../searchBar/SearchBar'; 
+import logo from '../../../assets/logo-login.svg'
 
 export const RegisterForm: FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -41,54 +43,56 @@ export const RegisterForm: FC = () => {
     }
   };
 
-  const handleChange =
-    (setter: React.Dispatch<React.SetStateAction<string>>) =>
-    (e: ChangeEvent<HTMLInputElement>) =>
-      setter(e.target.value);
-
   return (
-    <div className='register-container'>
+    <div className='register-form-container'>
       <form className='register-form' onSubmit={handleSubmit}>
-        <h2>Registro</h2>
-
-        <div className='input-group'>
-          <label htmlFor='email'>Correo electrónico:</label>
-          <input
-            type='email'
+        <img src={logo} alt="logo"/>
+      <div className='register-input-content'>
+        <div className=''>
+          <SearchBar
             id='email'
+            type='email'
             value={email}
-            onChange={handleChange(setEmail)}
+            onSearch={setEmail}
             required
+            placeholder='Email'
+            className='register-input'
           />
         </div>
 
-        <div className='input-group'>
-          <label htmlFor='password'>Contraseña:</label>
-          <input
-            type='password'
+        <div>
+          <SearchBar
             id='password'
+            type='password'
             value={password}
-            onChange={handleChange(setPassword)}
+            onSearch={setPassword}
             required
+            placeholder='Password'
+            className='register-input'
           />
         </div>
 
-        <div className='input-group'>
-          <label htmlFor='confirmPassword'>Confirmar contraseña:</label>
-          <input
-            type='password'
+        <div>
+          <SearchBar
             id='confirmPassword'
+            type='password'
             value={confirmPassword}
-            onChange={handleChange(setConfirmPassword)}
+            onSearch={setConfirmPassword}
             required
+            placeholder='Confirm password'
+            className='register-input'
           />
         </div>
+      </div>
 
         {error && <p className='error-message'>{error}</p>}
 
-        <Button type='submit' disabled={isSubmitting}>
+        <Button className='button-register' type='submit' disabled={isSubmitting}>
           {isSubmitting ? 'Creando cuenta...' : 'Crear cuenta'}
         </Button>
+          <p className="switch-form">Already have an account?
+          <Link to="/login">Go back to login</Link>
+        </p>
       </form>
     </div>
   );

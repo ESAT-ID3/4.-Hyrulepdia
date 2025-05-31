@@ -35,7 +35,7 @@ export const CollectionAll = ({ variant = 'default' }: CollectionAllProps) => {
 useEffect(() => {
   const timer = setTimeout(() => {
     setIsPageReady(true);
-  }, 100); 
+  }, 300); 
 
   return () => clearTimeout(timer);
 }, []);

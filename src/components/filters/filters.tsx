@@ -23,7 +23,7 @@ export const Filters = ({ onFilterTypesChange, onFilterCategoryChange, onSearchC
   return (
     <>
       <div className="filters">
-        <SearchBar onSearch={onSearchChange}/>
+        <SearchBar onSearch={onSearchChange} placeholder="Search..."/>
         <div  className="filters-buttons">
           <Button color="outlined" onClick={() => setIsReversed(prev => !prev)}>Card Nº</Button>
           <Button color="outlined" onClick={onFavoritesToggle}>

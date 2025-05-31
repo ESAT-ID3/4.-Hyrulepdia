@@ -32,7 +32,7 @@ export const Header = ()=> {
     return (
         <header>
                 <div>
-                    <NavLink className={"header-logo"} to="/">HYRULEPEDIA</NavLink>
+                    <NavLink className={"header-logo"} to="/shop">HYRULEPEDIA</NavLink>
                 </div>
                 <div className="header-content">
                     <nav className="header-nav">
