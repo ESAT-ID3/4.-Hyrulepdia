@@ -3,7 +3,7 @@ import { updateEmail, updatePassword, updateProfile } from 'firebase/auth';
 import { doc, updateDoc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../../../firebaseConfig/firebaseConfig';
 import { useEffect, useState } from 'react';
-import './UserProfileEditor.module.css';
+//import './UserProfileEditor.module.css';
 import styles from './UserProfileEditor.module.css';
 import { Button } from '../../button/button';
 
@@ -77,7 +77,10 @@ export const UserProfileEditor = () => {
       {message && <p>{message}</p>}
 
       <label className={styles.clickableImg}>
-        <img src={photoURL} alt='Foto de perfil' />
+        <img
+          src={photoURL === "''" ? 'src/assets/black 1.png' : photoURL}
+          alt='Foto de perfil'
+        />
         <input
           type='file'
           accept='image/*'
