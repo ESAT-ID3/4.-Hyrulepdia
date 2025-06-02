@@ -78,7 +78,7 @@ export const UserProfileEditor = () => {
 
       <label className={styles.clickableImg}>
         <img
-          src={photoURL === "''" ? 'src/assets/black 1.png' : photoURL}
+          src={photoURL ||'src/assets/black 1.png'}
           alt='Foto de perfil'
         />
         <input
