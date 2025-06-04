@@ -1,11 +1,12 @@
 import { useAuth } from '../../../context/authContext';
 import { updateEmail, updatePassword, updateProfile } from 'firebase/auth';
 import { doc, updateDoc, getDoc } from 'firebase/firestore';
-import { auth, db } from '../../../firebaseConfig/firebaseConfig';
+import { auth, db, storage } from '../../../firebaseConfig/firebaseConfig';
 import { useEffect, useState } from 'react';
-//import './UserProfileEditor.module.css';
 import styles from './UserProfileEditor.module.css';
 import { Button } from '../../button/button';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { compressImages } from '../../../utils/compressImages';
 
 export const UserProfileEditor = () => {
   const { user } = useAuth();
@@ -18,6 +19,7 @@ export const UserProfileEditor = () => {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [showSensitive, setShowSensitive] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
     if (!user) return;
@@ -33,11 +35,8 @@ export const UserProfileEditor = () => {
         const data = snapshot.data();
         setOneLiner(data.oneLiner || '');
         setGems(data.gems || 0);
-
-        // prioriza al de Firestore
         setPhotoURL(data.photoURL || user.photoURL || '');
       } else {
-        // Si no hay doc en Firestore, usa solo el de Firebase Auth
         setPhotoURL(user.photoURL || '');
       }
     };
@@ -67,8 +66,36 @@ export const UserProfileEditor = () => {
 
       setMessage('✅ Cambios guardados correctamente');
       setPassword('');
-    } catch (err: any) {
+    } catch (err) {
       setMessage(`❌ Error: ${err.message}`);
+    }
+  };
+
+  const handleImageUpload = async () => {
+    if (!selectedFile || !user || !auth.currentUser) {
+      setMessage('⚠️ Usuario no autenticado o sin imagen seleccionada');
+      return;
+    }
+
+    try {
+      // Comprimir la imagen seleccionada
+      const [compressedFile] = await compressImages([selectedFile]);
+
+      // Subir a Firebase
+      const imageRef = ref(storage, `profileImages/${user.uid}`);
+      await uploadBytes(imageRef, compressedFile);
+
+      // Obtener URL pública
+      const url = await getDownloadURL(imageRef);
+      setPhotoURL(url); // Mostrar en el frontend
+
+      // Actualizar perfil
+      await updateProfile(auth.currentUser, { photoURL: url });
+      await updateDoc(doc(db, 'users', user.uid), { photoURL: url });
+
+      setMessage('✅ Imagen comprimida y subida correctamente');
+    } catch (error) {
+      setMessage(`❌ Error al subir la imagen: ${error.message}`);
     }
   };
 
@@ -77,10 +104,7 @@ export const UserProfileEditor = () => {
       {message && <p>{message}</p>}
 
       <label className={styles.clickableImg}>
-        <img
-          src={photoURL ||'src/assets/black 1.png'}
-          alt='Foto de perfil'
-        />
+        <img src={photoURL || 'src/assets/black 1.png'} alt='Foto de perfil' />
         <input
           type='file'
           accept='image/*'
@@ -88,21 +112,22 @@ export const UserProfileEditor = () => {
           onChange={(e) => {
             const file = e.target.files?.[0];
             if (file) {
+              setSelectedFile(file);
               const url = URL.createObjectURL(file);
-              setPhotoURL(url);
+              setPhotoURL(url); // Previsualización
             }
           }}
         />
       </label>
+      <Button color='primary' size='sm' onClick={handleImageUpload}>
+        Subir imagen
+      </Button>
 
       <div className={styles.inputTextCardName}>
-        {/*<!-- Líneas verticales partidas laterales -->*/}
         <div className={styles.leftTopLine}></div>
         <div className={styles.leftBottomLine}></div>
         <div className={styles.rightTopLine}></div>
         <div className={styles.rightBottomLine}></div>
-
-        {/*<-- Líneas horizontales partidas -->*/}
         <div className={styles.topLeftLine}></div>
         <div className={styles.topRightLine}></div>
         <div className={styles.bottomLeftLine}></div>
@@ -117,13 +142,10 @@ export const UserProfileEditor = () => {
       </div>
 
       <div className={styles.inputTextCardOneLiner}>
-        {/*<!-- Líneas verticales partidas laterales -->*/}
         <div className={styles.leftTopLine}></div>
         <div className={styles.leftBottomLine}></div>
         <div className={styles.rightTopLine}></div>
         <div className={styles.rightBottomLine}></div>
-
-        {/*<-- Líneas horizontales partidas -->*/}
         <div className={styles.topLeftLine}></div>
         <div className={styles.topRightLine}></div>
         <div className={styles.bottomLeftLine}></div>
@@ -148,13 +170,10 @@ export const UserProfileEditor = () => {
       {showSensitive && (
         <>
           <div className={styles.inputTextCardOneLiner}>
-            {/*<!-- Líneas verticales partidas laterales -->*/}
             <div className={styles.leftTopLine}></div>
             <div className={styles.leftBottomLine}></div>
             <div className={styles.rightTopLine}></div>
             <div className={styles.rightBottomLine}></div>
-
-            {/*<-- Líneas horizontales partidas -->*/}
             <div className={styles.topLeftLine}></div>
             <div className={styles.topRightLine}></div>
             <div className={styles.bottomLeftLine}></div>
@@ -167,13 +186,10 @@ export const UserProfileEditor = () => {
           </div>
 
           <div className={styles.inputTextCardOneLiner}>
-            {/*<!-- Líneas verticales partidas laterales -->*/}
             <div className={styles.leftTopLine}></div>
             <div className={styles.leftBottomLine}></div>
             <div className={styles.rightTopLine}></div>
             <div className={styles.rightBottomLine}></div>
-
-            {/*<-- Líneas horizontales partidas -->*/}
             <div className={styles.topLeftLine}></div>
             <div className={styles.topRightLine}></div>
             <div className={styles.bottomLeftLine}></div>
