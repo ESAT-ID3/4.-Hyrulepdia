@@ -255,7 +255,7 @@ export const UserProfileEditor = () => {
           </div>
 
           {/* Nueva Contraseña (opcional) */}
-          <div className={styles.inputTextCardOneLiner}>
+          <div className={styles.inputTextCardName}>
             {/* Líneas decorativas */}
             <div className={styles.leftTopLine}></div>
             <div className={styles.leftBottomLine}></div>
@@ -276,7 +276,7 @@ export const UserProfileEditor = () => {
           </div>
 
           {/* Contraseña Actual (OBLIGATORIA para cambios sensibles) */}
-          <div className={styles.inputTextCardOneLiner}>
+          <div className={styles.inputTextCardName}>
             {/* Líneas decorativas */}
             <div className={styles.leftTopLine}></div>
             <div className={styles.leftBottomLine}></div>
