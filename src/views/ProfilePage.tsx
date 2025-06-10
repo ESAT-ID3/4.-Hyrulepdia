@@ -1,9 +1,11 @@
-import { UserProfileEditor } from '../components/firebase/user-profile/UserProfileEditor';
+import { UserProfileEditor } from "../components/firebase/user-profile/UserProfileEditor";
+import SVGSpotlight from "../components/SVGSpotlight/SVGSpotlight";
 
 //<UserProfileEditor />
 export const PorfilePage = () => {
   return (
     <div>
+      <SVGSpotlight />
       <UserProfileEditor />
     </div>
   );
