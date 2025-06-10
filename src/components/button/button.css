@@ -39,7 +39,7 @@
     display: flex;
     justify-content: center;
     transition: transform 0.3s ease;
-    font-family: "The Wild Breath of Zelda";
+    font-family: "title";
 }
 
 .button-corner {
@@ -91,6 +91,17 @@
 
     &:hover .button-corner {
         transform: scale(1.4);
+    }
+}
+
+
+
+@media (min-width: 769px) and (max-width: 1439px) {
+    .button.lg {
+        height: 58px;
+        padding: 0 12px;
+        font-size: 20px;
+        min-width: 240px;
     }
 }
 

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../context/authContext";
 import {doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from "../../firebaseConfig/firebaseConfig";
+import { toast } from "react-toastify";
 
 type StorePurchaseProps = {
     selectedChest: {
@@ -20,7 +21,6 @@ export const StorePurchase = ({selectedChest, onOpen}: StorePurchaseProps) => {
     const navigate = useNavigate();
     const { user } = useAuth();
     const [gems, setGems] = useState(0);
-    const [message, setMessage] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchGems = async () => {
@@ -41,7 +41,7 @@ export const StorePurchase = ({selectedChest, onOpen}: StorePurchaseProps) => {
         selectedChest.rarity === 'rare' ? 500 : 800;
 
         if (gems < cost) {
-            setMessage("You don't have enough gemes"); //quiero usar lo del toastify para sacar un popup. 
+            toast.error("You don't have enough gems!"); //quiero usar lo del toastify para sacar un popup. 
             return;
         }
 
@@ -51,10 +51,9 @@ export const StorePurchase = ({selectedChest, onOpen}: StorePurchaseProps) => {
 
             await updateDoc(userRef, {gems: newGems});
             setGems(newGems);
-            setMessage(null);
             onOpen();
         } catch (error: any) {
-            setMessage(`Error opening chest: ${error.message}`);
+            toast.error(`Error opening chest: ${error.message}`);
         }
     };
 
@@ -66,7 +65,6 @@ export const StorePurchase = ({selectedChest, onOpen}: StorePurchaseProps) => {
             <div className="store-purchase">
                 <Button onClick={() => navigate('/shop')}>BACK</Button>
                 <Button color='secondary' onClick={handleChestOpen}>OPEN</Button>
-                {message && <p className="store-purchase__message">{message}</p>}
                 {/* Pasamos los datos al ChestButton */}
                 <div className="store-purchase__chest">
                     <ChestButton rarity={rarity} price={price} />

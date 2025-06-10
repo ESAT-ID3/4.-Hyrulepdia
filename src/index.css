@@ -20,7 +20,7 @@ body {
 }
 
 .header-logo,h1,h2,h3,h4,h5 {
-  font-family: 'The Wild Breath of Zelda';
+  font-family: 'title';
 }
 h1,h2,h3,h4,h5,p,span {
   margin: 0;

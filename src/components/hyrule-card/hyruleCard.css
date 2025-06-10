@@ -34,13 +34,14 @@
 }
 
 .hyrule-card {
+    position: relative;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
     color: #f5e5c0;
     /* border: 0.38rem solid #E0CEA0; */
-    width: 300px;
+    width: 100%;
     padding-block: 0.3rem;
     border-radius: 0.5rem;  
     width: 14.24rem;
@@ -227,5 +228,4 @@
     border-radius: 0;
     pointer-events: none !important;
 }
-
 

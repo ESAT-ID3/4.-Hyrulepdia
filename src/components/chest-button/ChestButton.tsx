@@ -66,12 +66,14 @@ export const ChestButton = ({
         <CardContainer className='chest-button' colorClass={displayColorClass(rarity)}>
             <div className='chset-button__contnt'>
                 <h1>
-                    CHEST
-                    <br />
                     {displayRarity(rarity)}
+                    <br />
+                    CHEST
                 </h1>
                 {displayChestType(rarity)}
-                <h2>{price} <span><img src={rupiaIcon} alt={rupiaIcon}></img></span></h2>
+                <div className='chest-button__price'>
+                    <h2>{price} <span><img  className='chest-button__rupia' src={rupiaIcon} alt={rupiaIcon}></img></span></h2>
+                </div>
                 <div className="chest-button__text">
                     {displayDescription(rarity)}
                 </div>

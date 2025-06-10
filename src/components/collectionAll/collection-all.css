@@ -32,7 +32,6 @@ html {
     position: relative;
 }
 
-
 .collection-page__buttons {
     display: flex;
     flex-direction: column;
@@ -40,7 +39,6 @@ html {
     position: sticky;
     top: 230px;
     height: fit-content;
-    margin-top: 50px;
     align-items: center;
 }
 
@@ -62,4 +60,8 @@ html {
     width: 50px;
     height: auto;
 }
-
+@media (max-width: 1000px) {
+    .card--sm {
+        transform: scale(0.9);
+    }
+}

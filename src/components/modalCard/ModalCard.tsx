@@ -69,7 +69,7 @@ export const ModalCard: FC<ModalCardProps> = ({
             <HyruleCard {...selectedCard}  size="lg" />
           </div>
           <div className="modal-content__text-btn">
-            <h1>{selectedCard.name}</h1>
+            <h1>{selectedCard.name}</h1> 
             <p className="modal-description">{selectedCard.fullDescription}</p>
             <div className="modal-description">
               <h2>Common Location</h2>

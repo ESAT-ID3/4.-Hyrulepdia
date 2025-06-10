@@ -9,7 +9,7 @@ export interface HyruleCardType {
     location: string;
     items: string;
     category: 'creatures' | 'materials' | 'equipment' | 'monsters' | 'treasure';
-    size?: 'default' | 'lg' | 'xl';
+    size?: 'default' | 'lg' | 'xl' | 'sm';
     isFavorite?: boolean;
     disableClick?: boolean;
     isDiscovered?: boolean;
