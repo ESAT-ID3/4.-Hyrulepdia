@@ -1,48 +1,48 @@
-import { useAuth } from '../../../context/authContext';
+import { useAuth } from "../../../context/authContext";
 import {
   updateEmail,
   updatePassword,
   updateProfile,
   EmailAuthProvider,
   reauthenticateWithCredential,
-} from 'firebase/auth';
-import { doc, updateDoc, getDoc } from 'firebase/firestore';
-import { auth, db } from '../../../firebaseConfig/firebaseConfig';
-import { useEffect, useState } from 'react';
-import styles from './UserProfileEditor.module.css';
-import { Button } from '../../button/button';
-import imageCompression from 'browser-image-compression';
-import { toast } from 'react-toastify';
+} from "firebase/auth";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
+import { auth, db } from "../../../firebaseConfig/firebaseConfig";
+import { useEffect, useState } from "react";
+import styles from "./UserProfileEditor.module.css";
+import { Button } from "../../button/button";
+import imageCompression from "browser-image-compression";
+import { toast } from "react-toastify";
 
 export const UserProfileEditor = () => {
   const { user } = useAuth();
 
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [displayName, setDisplayName] = useState('');
-  const [photoURL, setPhotoURL] = useState('');
-  const [oneLiner, setOneLiner] = useState('');
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [displayName, setDisplayName] = useState("");
+  const [photoURL, setPhotoURL] = useState("");
+  const [oneLiner, setOneLiner] = useState("");
   const [gems, setGems] = useState(0);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showSensitive, setShowSensitive] = useState(false);
   const [loadingImage, setLoadingImage] = useState(false);
 
   useEffect(() => {
     if (!user) return;
 
-    setDisplayName(user.displayName || '');
-    setEmail(user.email || '');
+    setDisplayName(user.displayName || "");
+    setEmail(user.email || "");
 
     const fetchProfileData = async () => {
-      const docRef = doc(db, 'users', user.uid);
+      const docRef = doc(db, "users", user.uid);
       const snapshot = await getDoc(docRef);
       if (snapshot.exists()) {
         const data = snapshot.data();
-        setOneLiner(data.oneLiner || '');
+        setOneLiner(data.oneLiner || "");
         setGems(data.gems || 0);
-        setPhotoURL(data.photoURL || '');
+        setPhotoURL(data.photoURL || "");
       } else {
-        setPhotoURL('');
+        setPhotoURL("");
       }
     };
 
@@ -50,16 +50,16 @@ export const UserProfileEditor = () => {
   }, [user]);
 
   const transformFileToDataUrl = (file: File): Promise<string | null> => {
-    const imageAllowedTypes = ['image/webp', 'image/jpeg', 'image/png'];
+    const imageAllowedTypes = ["image/webp", "image/jpeg", "image/png"];
 
     if (!imageAllowedTypes.includes(file.type)) {
-      toast.error('Solo se permiten imágenes en formato WEBP, JPEG o PNG.');
+      toast.error("Solo se permiten imágenes en formato WEBP, JPEG o PNG.");
       return Promise.resolve(null);
     }
 
     if (file.size > 550 * 1024) {
       toast.error(
-        'La imagen no debe exceder los 550 KB después de la compresión.'
+        "La imagen no debe exceder los 550 KB después de la compresión."
       );
       return Promise.resolve(null);
     }
@@ -72,9 +72,9 @@ export const UserProfileEditor = () => {
       };
 
       reader.onerror = () => {
-        console.error('Error al leer el archivo con FileReader.');
+        console.error("Error al leer el archivo con FileReader.");
         toast.error(
-          'Ocurrió un error al cargar la imagen. Inténtalo de nuevo.'
+          "Ocurrió un error al cargar la imagen. Inténtalo de nuevo."
         );
         resolve(null);
       };
@@ -107,12 +107,12 @@ export const UserProfileEditor = () => {
           '✅ Imagen lista para guardar. ¡No olvides hacer clic en "Guardar"!'
         );
       } else {
-        toast.error('❌ No se pudo procesar la imagen.');
+        toast.error("❌ No se pudo procesar la imagen.");
       }
     } catch (error: any) {
-      console.error('Error al procesar la imagen:', error);
+      console.error("Error al procesar la imagen:", error);
       toast.error(
-        `❌ Error al subir la imagen: ${error.message || 'Intenta de nuevo.'}`
+        `❌ Error al subir la imagen: ${error.message || "Intenta de nuevo."}`
       );
     } finally {
       setLoadingImage(false);
@@ -121,7 +121,7 @@ export const UserProfileEditor = () => {
 
   const handleSave = async () => {
     if (!user || !auth.currentUser) {
-      toast.error('❌ No hay usuario autenticado.');
+      toast.error("❌ No hay usuario autenticado.");
       return;
     }
 
@@ -134,7 +134,7 @@ export const UserProfileEditor = () => {
 
       if (password) {
         if (!currentPassword) {
-          toast.error('❌ Debes ingresar tu contraseña actual para cambiarla.');
+          toast.error("❌ Debes ingresar tu contraseña actual para cambiarla.");
           return;
         }
 
@@ -146,20 +146,20 @@ export const UserProfileEditor = () => {
         await updatePassword(auth.currentUser, password);
       }
 
-      await updateDoc(doc(db, 'users', user.uid), {
+      await updateDoc(doc(db, "users", user.uid), {
         oneLiner,
         gems,
         photoURL,
       });
 
-      toast.success('✅ Cambios guardados correctamente');
-      setPassword('');
-      setCurrentPassword('');
+      toast.success("✅ Cambios guardados correctamente");
+      setPassword("");
+      setCurrentPassword("");
     } catch (err: any) {
-      console.error('Error al guardar el perfil:', err);
-      if (err.code === 'auth/requires-recent-login') {
+      console.error("Error al guardar el perfil:", err);
+      if (err.code === "auth/requires-recent-login") {
         toast.error(
-          '❌ Por favor, vuelve a iniciar sesión para actualizar tu email o contraseña.'
+          "❌ Por favor, vuelve a iniciar sesión para actualizar tu email o contraseña."
         );
       } else {
         toast.error(`❌ Error al guardar: ${err.message}`);
@@ -170,11 +170,11 @@ export const UserProfileEditor = () => {
   return (
     <div className={styles.containerProfile}>
       <label className={styles.clickableImg}>
-        <img src={photoURL || 'src/assets/black 1.png'} alt='Foto de perfil' />
+        <img src={photoURL || "src/assets/black 1.png"} alt="Foto de perfil" />
         <input
-          type='file'
-          accept='image/webp, image/jpeg, image/png'
-          style={{ display: 'none' }}
+          type="file"
+          accept="image/webp, image/jpeg, image/png"
+          style={{ display: "none" }}
           onChange={handleImageUpload}
           disabled={loadingImage}
         />
@@ -184,8 +184,8 @@ export const UserProfileEditor = () => {
       <div className={styles.inputTextCardName}>
         <input
           className={styles.inputText}
-          placeholder='NAME'
-          type='text'
+          placeholder="NAME"
+          type="text"
           value={displayName}
           onChange={(e) => setDisplayName(e.target.value)}
         />
@@ -194,49 +194,49 @@ export const UserProfileEditor = () => {
       <div className={styles.inputTextCardOneLiner}>
         <input
           className={styles.inputText}
-          placeholder='ONE LINER'
-          type='text'
+          placeholder="ONE LINER"
+          type="text"
           value={oneLiner}
           onChange={(e) => setOneLiner(e.target.value)}
         />
       </div>
 
       <Button
-        color='primary'
-        size='sm'
+        color="primary"
+        size="sm"
         onClick={() => setShowSensitive((prev) => !prev)}
       >
-        {showSensitive ? 'Ocultar' : 'Editar'}
+        {showSensitive ? "Ocultar" : "Editar"}
       </Button>
 
       {showSensitive && (
         <>
           <div className={styles.inputTextCardOneLiner}>
             <input
-              type='email'
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={styles.inputText}
-              placeholder='Correo electrónico'
+              placeholder="Correo electrónico"
             />
           </div>
 
           <div className={styles.inputTextCardName}>
             <input
-              type='password'
+              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder='Contraseña nueva'
+              placeholder="Contraseña nueva"
               className={styles.inputText}
             />
           </div>
 
           <div className={styles.inputTextCardName}>
             <input
-              type='password'
+              type="password"
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
-              placeholder='Contraseña actual'
+              placeholder="Contraseña actual"
               className={styles.inputText}
             />
           </div>
@@ -244,8 +244,8 @@ export const UserProfileEditor = () => {
       )}
 
       <Button
-        color='primary'
-        size='sm'
+        color="primary"
+        size="sm"
         onClick={handleSave}
         disabled={loadingImage}
       >
