@@ -1,0 +1,59 @@
+.filter-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 70%;
+  height: 100%;
+  backdrop-filter: blur(25px);
+  display: flex;
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.filter-modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 11;
+}
+
+.filter-modal-panel {
+  height: 100%;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.filter-modal-overlay.open .filter-modal-panel {
+  transform: translateX(0);
+}
+
+
+.close-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    
+}
+
+.close-btn__content {
+    padding-top: 40px;
+    padding-left: 32px;
+}
+
+.dropdown-button .filter-modal-overlay {
+    display: flex;
+    align-items: flex-start;
+
+}
+
+.filter-modal-open {
+  overflow: hidden;
+  height: calc(100vh - 76px);
+}
+
+
+
+
+

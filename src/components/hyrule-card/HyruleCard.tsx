@@ -53,7 +53,7 @@ export const HyruleCard = ({
     category = 'monsters',
     size = 'default',
     disableClick = false,
-    isDiscovered= false
+    isDiscovered= false, 
 } : HyruleCardType )  => {
     
     return (
@@ -61,10 +61,11 @@ export const HyruleCard = ({
             ${!isDiscovered ? 'hidden-card' : ''}   
             ${disableClick ? "card--disabled" : ""}
             ${size === "lg" ? "card--lg" : ""} 
-            ${size === "xl" ? "card--xl" : ""}`}>
+            ${size === "xl" ? "card--xl" : ""}
+            ${size === "sm" ? "card--sm" : ""}`}>
             <div className="hyrule-card">
                 <div className="hyrule-card__header">
-                    <h2>{name}</h2>
+                    <div className='h2'>{name}</div>
                     <div className='hyrule-card__type'>
                         <span className='hyrule-card__points'>{points}</span>
                         {displayIcon(category)}

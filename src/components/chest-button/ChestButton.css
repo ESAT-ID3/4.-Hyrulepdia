@@ -45,6 +45,8 @@
     justify-content: center;
     align-content: center;
     object-fit: cover;
+    /* user-drag: none; */
+    -webkit-user-drag: none;
 }
 
 .chest-button__text h3 {
@@ -65,4 +67,67 @@
 
 .chest-button__text__epic {
     color: #BA6ED5;
+}
+
+.chest-price__content {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+}
+
+.chest-price__content p {
+    font-size: 18px;
+    color: white;
+}
+
+    @media (max-width: 1124px) {
+        .chest-button {
+            width: 18rem;
+            height: 32rem;
+        }
+
+        .chest-button__img {
+            width: 18rem;
+            height: 18rem;
+    }
+
+        .chest-button h1, h2 {
+            font-size: 1.7rem;
+        }
+
+        .chest-rupia-icon {
+            width: 18px;
+            height: 18px;
+        }
+}
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-10px, -10px);
+  }
+  40% {
+    transform: translate(10px, 10px);
+  }
+  60% {
+    transform: translate(-10px, 10px);
+  }
+  80% {
+    transform: translate(10px, -10px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.chest-button__img.vibrar {
+  animation: glitch 0.5s infinite;
+  transform: scale(1.2);
+}
+.chest-button__rupia {
+    height: 1.8rem;
 }

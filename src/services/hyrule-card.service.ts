@@ -57,32 +57,11 @@ export const getRandomHyruleData = async( num : number = 3, chestRarity: 'common
     const selected: HyruleCardType[] =  shuffled.slice(0, num).map((item) => { //el map se usa para transformar cada elemento del array original en un nuvo objeto con una forma diferente: HyruleCardType.
         const rarity = getRandomRarity(chestRarity);
 
-        //para que los textos tengan máximo 130 caracteres incluyendo espacios y signos
-        const trimmedDescription = item.description.length > 120
-            ? item.description.slice(0, 115) + '...'
-            : item.description;
-
-        //Para acortar locations si hay mas de 4
-        const trimmedLocations = item.common_locations && item.common_locations.length > 0
-            ? item.common_locations.length > 3
-                ? item.common_locations.slice(0, 3).join(', ') + ', ...'
-                : item.common_locations.join(', ')
-            : 'Unknown';
-
-        //para acortar drop items si hay más de 4
-        const trimmedDrops = item.drops && item.drops.length > 0
-            ? item.drops.length > 3
-                ? item.drops.slice(0, 3).join(', ') + ', ...'
-                : item.drops.join(', ')
-            :'None';
-
         return {
             id: item.id,
             name: item.name,
             image: item.image,
-            description: trimmedDescription,
-            location: trimmedLocations, //une las locations, si no hay pone unknown
-            items: trimmedDrops,
+            fullDescription: item.description, //es la propiedad que se necesitaba para que el const: selected funcione bien
             category: item.category as HyruleCardType['category'],
             rarity,
             points: getPointsByRarity(rarity),

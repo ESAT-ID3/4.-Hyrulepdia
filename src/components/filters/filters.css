@@ -1,18 +1,70 @@
 .filters {
     display: flex;
     padding-inline: 27px;
-    margin-top: 40px;
+    margin-top: 48px;
     justify-content: space-between;
     position: sticky;
     top: 52px;
     z-index: 10;
     background: transparent;  
     backdrop-filter: blur(16px);
+    gap: 60px;
+}
+
+.filters.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.filters.visible {
+  transform: translateY(0);
+  opacity: 1;
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }
 
 .filters-buttons {
     display: flex;
-    gap: 40px;
+    gap: 20px;
 }
+
+.filters-btn__modal {
+    display: none;
+}
+
+.filter-modal-buttons {
+  display: flex !important;
+  flex-direction: column; 
+  gap: 2rem;
+  padding-top: 10px;
+}
+
+@media (max-width: 1124px) {
+    .filters {
+        justify-content: center;
+        position: unset;
+        gap: 30px;
+        backdrop-filter: none;
+    }
+     .filters-buttons {
+        display: none;
+    }
+
+    .filters-btn__modal {
+        display: flex;
+        width: 66px;
+    }
+
+    .filter-buttons {
+        display: flex !important;  
+    }
+}
+
+@media (min-width: 1440px) {
+    .filters-buttons {
+       gap: 40px;
+    }
+}
+
 
 

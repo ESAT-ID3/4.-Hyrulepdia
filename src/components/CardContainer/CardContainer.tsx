@@ -1,5 +1,8 @@
 import React from 'react';
 import './CardContainer.css';
+import fill from '../../assets/Fill-10.svg';
+import fillBlue from '../../assets/Fill-10-blue.svg';
+import fillPurple from '../../assets/Fill-10-purple.svg';
 
 //Props que recibe desde donde se le invoque como App.tsx
 //Estos props pueden ser cualquier cosa mientras esten dentro del componente
@@ -40,10 +43,10 @@ export const CardContainer = ({
             <img
               src={
                 colorClass === 'blue-theme'
-                  ? 'src/assets/Fill-10-blue.svg'
+                  ? fillBlue
                   : colorClass === 'purple-theme'
-                  ? 'src/assets/Fill-10-purple.svg'
-                  : 'src/assets/Fill-10.svg'
+                  ? fillPurple
+                  : fill
               }
               className='svg-icon'
               alt='svg-top-left'
@@ -53,10 +56,10 @@ export const CardContainer = ({
             <img
               src={
                 colorClass === 'blue-theme'
-                  ? 'src/assets/Fill-10-blue.svg'
+                  ? fillBlue
                   : colorClass === 'purple-theme'
-                  ? 'src/assets/Fill-10-purple.svg'
-                  : 'src/assets/Fill-10.svg'
+                  ? fillPurple
+                  : fill
               }
               className='svg-icon'
               alt='svg-top-right'
@@ -66,10 +69,10 @@ export const CardContainer = ({
             <img
               src={
                 colorClass === 'blue-theme'
-                  ? 'src/assets/Fill-10-blue.svg'
+                  ? fillBlue
                   : colorClass === 'purple-theme'
-                  ? 'src/assets/Fill-10-purple.svg'
-                  : 'src/assets/Fill-10.svg'
+                  ? fillPurple
+                  : fill
               }
               className='svg-icon'
               alt='svg-bottom-left'
@@ -79,10 +82,10 @@ export const CardContainer = ({
             <img
               src={
                 colorClass === 'blue-theme'
-                  ? 'src/assets/Fill-10-blue.svg'
+                  ? fillBlue
                   : colorClass === 'purple-theme'
-                  ? 'src/assets/Fill-10-purple.svg'
-                  : 'src/assets/Fill-10.svg'
+                  ? fillPurple
+                  : fill
               }
               className='svg-icon'
               alt='svg-bottom-right'

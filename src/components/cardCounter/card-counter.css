@@ -11,11 +11,26 @@
     width: 81px;
     padding: 18px 8px;
     color: white;
-    background-color: rgba(0, 0, 0, 0.26);
+    background-color: rgba(39, 88, 128, 0.57);
     font-size: 14px;
     text-align: center;
     margin-right: 27px;
 }
+
+@media (min-width: 750px) and (max-width: 1439px) {
+    .card-counter {
+        width: 60px;
+        padding: 14px 6px;
+    }
+}
+
+@media (max-width: 749px) {
+    .card-counter {
+        width: 48px;
+        font-size: 12px;
+    }
+}
+
 
 .card-counter .right-line-top,
 .card-counter .right-line-bottom,

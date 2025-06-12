@@ -11,11 +11,13 @@ import { useNavigate } from "react-router-dom";
 import { CollectionFavorites } from "../../hooks/useCollectionFavorites.ts";
 import { useUserCollection } from "../../hooks/useUserCollection";
 import loadingGif from '../../assets/gif-zelda-loading.webp'
+import { FilterModal } from "../filterModal/FilterModal.tsx";
 
 import '../hyrule-card/hyruleCard.css';
 import './collection-all.css'
 import '../cardCounter/card-counter.css'
 import '../modalCard/modal-card.css'
+import '../filterModal/filter-modal.css'
 
 interface CollectionAllProps {
   variant?: 'default' | 'library';
@@ -27,47 +29,48 @@ export const CollectionAll = ({ variant = 'default' }: CollectionAllProps) => {
   const [isShowingFavorites, setIsShowingFavorites] = useState(false);
   const [selectedCard, setSelectedCard] = useState<HyruleCardType | null>(null);
   const [isPageReady, setIsPageReady] = useState(false);
+  const [loadingCards, setLoadingCards] = useState(true);
+  const [hasAttemptedLoad, setHasAttemptedLoad] = useState(false);
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
   const { userCards, loading: loadingUserCards, error: userCardsError } = useUserCollection();
   const { favoriteIds, favoriteCards: fetchedFavoriteCards } = CollectionFavorites(isShowingFavorites);
   const navigate = useNavigate();
-
-useEffect(() => {
-  const timer = setTimeout(() => {
-    setIsPageReady(true);
-  }, 100); 
-
-  return () => clearTimeout(timer);
-}, []);
+  const isStillLoading = loadingUserCards || loadingCards;
+  
 
   // Cargar todas las cartas
 useEffect(() => {
   const fetchData = async () => {
+    setLoadingCards(true);
+
     const allCards = await getAllCards();
 
     if (allCards) {
-      const markedCards = allCards.map(card => {
-        const userCard = userCards.find(c => c.id === card.id);
+ const markedCards = allCards.map(card => {
+  const userCard = userCards.find(c => c.id === card.id);
 
-        return {
-          ...card,
-          isDiscovered: !!userCard,
-          rarity: userCard?.rareza || 'common' // Aquí aplicas la rareza real
-        };
-      });
+  return {
+    ...card,
+    isDiscovered: !!userCard,
+    rarity: userCard?.rareza || 'common'
+  };
+});
 
       setCards(markedCards);
     }
+    setLoadingCards(false);
+    
   };
 
-  if (userCards.length > 0) {
+  if (userCards.length >= 0) {
     fetchData();
   }
 }, [userCards]);
 
   // Actualizar cartas favoritas
   useEffect(() => {
-    if (fetchedFavoriteCards.length > 0) {
+    if (fetchedFavoriteCards.length >= 0) {
       setFavoriteCards(fetchedFavoriteCards);
     }
   }, [fetchedFavoriteCards]);
@@ -77,13 +80,13 @@ useEffect(() => {
   const filtersForAll = useFilters(cards, variant === "library");
   const filtersForFavorites = useFilters(favoriteCards);
 
-  const {
-    filteredCards,
-    setFilterRarity,
-    setFilterCategory,
-    setSearchQuery,
-    setIsReversed,
-  } = isShowingFavorites ? filtersForFavorites : filtersForAll;
+const {
+  filteredCards,
+  setFilterRarity,
+  setFilterCategory,
+  setSearchQuery,
+  setIsReversed,
+} = isShowingFavorites ? filtersForFavorites : filtersForAll;
 
   const handleFavoritesToggle = () => {
     setIsShowingFavorites(prev => !prev);
@@ -96,7 +99,7 @@ useEffect(() => {
   // Decide qué cartas mostrar según el modo y filtros
   const cardsToDisplay = isShowingFavorites ? filtersForFavorites.filteredCards.filter(card => card.isDiscovered) : (variant === "library" ? filtersForAll.filteredCards : filteredCards);
 
-    if (loadingUserCards && isPageReady) {
+    if (isPageReady) {
       return (
         <div className="collection-container loading">
           <img src={loadingGif} alt="Cargando..." className="loading-gif" />
@@ -104,10 +107,29 @@ useEffect(() => {
     );
 }
 
+  if (!userCards) {
+    return (
+      <div>
+        <p>Looks like Link forgot to pick up your cards. Typical</p>
+      </div>
+    )
+  }
+
   if (userCardsError) return <p>Error cargando cartas del usuario: {userCardsError}</p>;
 
   return (
     <>
+      <FilterModal   
+        open={isFilterModalOpen}
+        onClose={() => setIsFilterModalOpen(false)}
+        onFilterTypesChange={setFilterRarity}
+        onFilterCategoryChange={setFilterCategory}
+        onSearchChange={setSearchQuery}
+        setIsReversed={setIsReversed}
+        onFavoritesToggle={handleFavoritesToggle}
+        isShowingFavorites={isShowingFavorites}
+        > 
+      </FilterModal>
       <Filters
         onFilterTypesChange={setFilterRarity}
         onFilterCategoryChange={setFilterCategory}
@@ -115,6 +137,7 @@ useEffect(() => {
         setIsReversed={setIsReversed}
         onFavoritesToggle={handleFavoritesToggle}
         isShowingFavorites={isShowingFavorites}
+        onOpenFiltersModal={() => setIsFilterModalOpen(true)}
       />
       <div className="collection-page">
         <div className="collection-page__buttons">
@@ -132,14 +155,18 @@ useEffect(() => {
             total={cards.length}
           />
           <div className="collection-container">
-            {cardsToDisplay.length === 0 ? (
-              <div className="no-cards-container">
-                <img src={loadingGif} alt="No hay cartas" className="no-cards-gif" /> 
-              </div>
-            ) : (
+            {isStillLoading ? (
+                <div className="loading-container">
+                  <img src={loadingGif} alt="Loading cards..." className="loading-gif" />
+                </div>
+              ) : cardsToDisplay.length === 0 && hasAttemptedLoad ? (
+                <div className="no-cards-message">
+                  <p>Looks like Link forgot to pick up your cards. Typical.</p>
+                </div>
+              ) : (
             cardsToDisplay.map((card) => (
               <div
-                className="test"
+                className="card-container"
                 key={card.id}
                 onClick={
                   card.isDiscovered ? () => setSelectedCard(card) : undefined

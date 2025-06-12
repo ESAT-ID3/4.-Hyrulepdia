@@ -1,62 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
-
 .popup-gems-info {
-    position:fixed;
-    top: 0;
+    position: fixed;
+    top: -16px;
+    left: 0;
     z-index: 10;
     width: 100%;
     height: 100%;
     background-color: #3333336d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .popup-gems-info__content {
+    position: relative;
+    height: fit-content;
+    width: 70%;
+    border: 2px solid #7CD2FF;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    gap: 1.5rem;
-    font-family: Arial, sans-serif; 
-    font-size: 1.5rem;
-    background: none;
+    gap: 3.5rem;
+    font-size: 2rem;
     color: #7CD2FF;
-    border-radius: 8px;
-    margin-inline: 0.2rem;
     background-color: rgba(19, 22, 27, 1);
-    padding: 4rem;
-    align-items: center;
+    padding: 6.8rem;
     box-shadow: 0px 0px 150.2px 0px rgba(83, 172, 255, 0.70);
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto; /* como en position absolute no se puede alinear al top y al bottom a la vez, lo centra */
-    min-height: 40%;
-    max-height: 70%;
-    height: auto;
-    min-width: 50%;
-    max-width: 70%;
-    line-height: 80px;
-    height: fit-content; /* para centrar si no tiene ninguna etiqueta dentro del div */
+
 }
 
 .popup-gems-info__gem-guide {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 4rem;
     flex-direction: row;
 }
 
 .popup-gems-info__content h1 {
     font-weight: 200;
-    line-height: 3.2rem;
+    line-height: 4.2rem;
     color: #275880;
+    margin-bottom: 1rem;
 }
 
 .popup-gems-info__content span {
     font-weight: 200;
     line-height: 3.2rem;
     color: #f5e5c0;
+    font-family: 'The Wild Breath of Zelda';
 }
 
 .popup-gems-info__content h2 {
@@ -84,4 +76,30 @@
 
 .popup-gems-info__gem-guide__battel p {
     line-height: 2rem;
+}
+
+/* Responsive */
+
+@media (max-width: 749px) {
+    .popup-gems-info__content h1 {
+        font-size: 30px;
+    }
+
+    .popup-gems-info__content p {
+        font-size: 12px;
+    }
+
+    .popup-gems-info__content h2 {
+        font-size: 16px;
+    }
+
+    .popup-gems-info__content {
+        line-height: 20px;
+        gap: 16px;
+        padding: 3.8rem;
+    }
+
+    .popup-gems-info__gem-guide {
+        grid-template-columns: 1fr;
+    }
 }

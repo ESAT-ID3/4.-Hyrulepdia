@@ -11,6 +11,12 @@
     text-transform: uppercase;
     text-align: center;
 } 
+  @media (min-width: 1025px) and (max-width: 1600px) {
+    input{
+        font-size: 18px;
+    }
+    }
+
 .search-bar {
     display: flex;
     align-items: center;
@@ -23,10 +29,40 @@
     background-color: transparent;
     text-transform: uppercase;
     cursor: pointer;
-    height: 48px;
+    max-height: 38px;
     padding: 0 60px;
-    width: 568px;
+    min-width: 160px;
+    max-width: 568px;
+    flex: 1;
 }
+
+    @media (max-width: 1124px) {
+        .search-bar {
+            justify-content: center;
+            height: 34px;
+            max-width: 100px;
+    }
+        input {
+            font-size: 14px;
+        }
+}
+
+@media (max-width: 749px) {
+        .search-bar {
+            justify-content: center;
+            height: 34px;
+            min-width: 80px;
+
+    }
+}
+
+    @media (max-width: 1400px) {
+        .search-bar {
+            width: 230px;
+        }
+    }
+
+
 
 .search-bar.outlined::before {
     background-image: none;

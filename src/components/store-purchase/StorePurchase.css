@@ -10,6 +10,17 @@
     gap: 3.5rem
 }
 
+.store-purchase__content {
+    display: flex;
+    gap: 8rem;
+}
+
+.store-purchase__btn {
+    display: flex;
+    gap: 33px;
+    align-items: center
+}
+
 /* sobrescribe el ancho y alto definidos en ChestButton.css (width: 23.375rem; height: 40.5rem) solo en esta pantalla, sin afectar otras. */
 .store-purchase__chest .chest-button {
     width: 25rem;
@@ -31,13 +42,15 @@
 
 .store-purchase__info h2 {
     font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
 }
 
 .store-purchase__info p, li{
     color: rgb(255, 255, 255);
     font-family: "Geist", sans-serif;
     font-weight: 400;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
 }
 
 .store-purchase__info ul {
@@ -60,4 +73,34 @@
 
 .store-purchase__title-epic {
     color:#BA6ED5;
+}
+
+/* Responsive */
+
+@media (max-width: 1124px) {
+    .store-purchase {
+        display: flex;
+        flex-direction: column;
+        margin-top: 3rem;
+    }
+
+    .store-purchase__content {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 3rem;
+        align-items: center;
+    }
+
+    .store-purchase__btn {
+        display: flex;
+        gap: 16px;
+    }
+
+
+}
+
+@media (max-width: 749px) {
+        .store-purchase__chest {
+        transform: scale(0.9);
+    }
 }

@@ -1,0 +1,105 @@
+/* Contenedor general de mazos */
+  .collection-page__decks {
+    display: flex;
+    margin-left: 2rem;
+    flex-wrap: wrap;
+    gap: 4rem
+  }
+  
+  /* Cada bloque individual de mazo */
+  .deck-preview {
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    background: #101422c2;
+    border: 1px solid #dddddd00;
+    border-radius: 6px;
+    overflow: hidden;
+    padding: 0.5rem;
+    transition: box-shadow 0.2s ease;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    width: 15rem;
+    height: 23.5rem;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border: 1px solid #7CD2FF;
+  }
+
+  .deck-preview::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.60); /* nivel de oscuridad */
+  z-index: 1;
+}
+  
+.deck-preview:hover {
+    box-shadow: 0 5px 13px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+}
+  
+  /* Imagen principal del mazo */
+  .deck-image img {
+    aspect-ratio: 10 / 14;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  
+  /* Nombre del mazo debajo de la imagen */
+  .deck-name {
+    margin-top: 0.75rem;
+    font-weight: 100;
+    font-size: 2.5rem;
+    letter-spacing: 0.2rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #7CD2FF;
+    text-shadow: 0px 0px 4px #96cefc;
+    word-wrap: break-word;
+    font-family: 'title';
+  }
+
+  .deck-name{
+  position: relative;
+  z-index: 2;
+  }
+
+.deck-button {
+    margin: 0;
+    align-self: start;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.deck-button img {
+    object-fit: contain;
+    width: 15rem;
+    height: 26.5rem;
+    transition: transform 0.3s ease-in-out;
+}
+
+.deck-button:hover img {
+    transform: scale(1.1);
+}
+
+/*media query para responsive*/
+
+@media (max-width: 768px) {
+  .collection-page__decks {
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0 1rem; /* opcional: añade márgenes internos */
+  }
+}

@@ -9,25 +9,65 @@ html {
   font-family: 'Geist-Mono', sans-serif;
 }
 
-@font-face {
-  font-family: "The Wild Breath of Zelda";
-  src: url("./fonts/the-wild-breath-of-zelda.ttf");
-}
-
-body {
-  margin: 40px 60px;
-  padding: 0;
-}
-
 .header-logo,h1,h2,h3,h4,h5 {
-  font-family: 'The Wild Breath of Zelda';
+  font-family: 'title';
 }
 h1,h2,h3,h4,h5,p,span {
   margin: 0;
+}
+
+p, span, button {
+  font-family: 'Geist';
 }
 
 a {
   text-decoration: none;
   padding: 0 !important;
   margin: 0;
+}
+
+@font-face {
+  font-family: "The Wild Breath of Zelda";
+  src: url("./fonts/the-wild-breath-of-zelda.ttf");
+}
+
+@font-face {
+  font-family: "Geist";
+  src: url("./fonts/Geist-Regular.ttf");
+}
+
+body {
+  margin: 40px 60px;
+  padding: 0;
+  font-family: 'Geist';
+}
+
+@media (min-width: 990px) and (max-width: 1439px) {
+  body {
+    margin: 25px 40px;
+    padding: 0;
+  }
+}
+
+@media (min-width: 749px) and (max-width: 989px) {
+  body {
+    margin: 12px 16px;
+    padding: 0;
+  }
+}
+
+@media (max-width: 749px) {
+  body {
+    margin: 12px 16px;
+    padding: 0;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 749px) {
+  html {
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
 }

@@ -116,3 +116,43 @@ input {
   bottom: 0;
   height: calc(30% - 1px);
 }
+
+@media (max-width: 768px) {
+  .inputTextCardOneLiner {
+    width: 90%;
+  }
+  .inputTextCardName {
+    width: 70%;
+  }
+
+  .containerProfile {
+    padding-top: 24px;
+    gap: 16px;
+  }
+
+  .clickableImg img {
+    width: 80px;
+    height: 80px;
+  }
+
+  input {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .inputTextCardOneLiner,
+  .inputTextCardName {
+    width: 100%;
+    margin: 8px 0;
+  }
+
+  .clickableImg img {
+    width: 64px;
+    height: 64px;
+  }
+
+  input {
+    font-size: 13px;
+  }
+}

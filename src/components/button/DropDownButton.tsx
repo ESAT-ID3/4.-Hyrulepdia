@@ -9,9 +9,10 @@ export interface DropdownButtonProps {
   onSelect?: (option: string) => void;
   size?: Size;
   children?: ReactNode;
+  isModal?: boolean; 
 }
 
-export const DropDownButton = ({ options, onSelect, size = 'md', children }: DropdownButtonProps) => {
+export const DropDownButton = ({ options, onSelect, size = 'md', children, isModal }: DropdownButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string>('');
 
@@ -48,7 +49,7 @@ export const DropDownButton = ({ options, onSelect, size = 'md', children }: Dro
         <img src={isOpen ? minusIcon : plusIcon} alt="toggle icon" className="dropdown-icon" />
       </button>
 
-      <div className={`dropdown-button__options ${isOpen ? 'open' : ''}`}>
+      <div className={`dropdown-button__options ${isOpen ? 'open' : ''} ${isModal ? 'static-position' : ''}`}>
         {options.map((option) => (
           <button
             className="dropdown-button__option button"

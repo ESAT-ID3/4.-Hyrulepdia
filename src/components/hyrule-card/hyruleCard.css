@@ -1,14 +1,3 @@
-@font-face {
-    font-family: 'title';
-    src: url('./TheWildBreath.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&family=Patrick+Hand&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&family=Irish+Grover&family=Patrick+Hand&display=swap');
-
 .hyrule-card__border {
     display: flex;
     justify-content: center;
@@ -34,17 +23,17 @@
 }
 
 .hyrule-card {
+    position: relative;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;    
+    align-items: center;
     color: #f5e5c0;
-    /* border: 0.38rem solid #E0CEA0; */
-    width: 300px;
-    padding-block: 0.3rem;
+    padding: 0.3rem 0.8rem;
     border-radius: 0.5rem;  
-    width: 14.24rem;
-    height: 20.24rem; 
+    width: calc(100% - 8px);
+    height: calc(100% - 8px); 
     background-image: url(..\..\assets\backgrounds\card-background.png);
     background-size:90% 90%;
     background-color: #0d0d0d;    
@@ -59,25 +48,24 @@
     font-size: 0.82rem;
     margin-bottom: 0.1rem;
     color: #f5e5c0;
+    width: 100%;
 }
 
 .hyrule-card__type {
     display: flex;
     align-items: center;
-    margin-bottom: 0.3rem;
 }
 
 .hyrule-card__icon {
     padding-left: 0.2rem;
-    width: 1.4rem;
+    width: 1rem;
     height: auto;
+    margin-bottom: -0;
 }
 
-.hyrule-card__header h2 {
-    margin-block: 0;
+.hyrule-card__header .h2 {
     font-size: 1.2rem;
     color: #f5e5c0;
-    line-height: 0;
 }
 
 .hyrule-card__points {
@@ -85,33 +73,42 @@
     font-weight: 100;
 }
 
-.hyrule-card__image img {
-    width: 87%;
-    margin-inline: 0.95rem;
+.hyrule-card__image {
     border-radius: 0.35rem;
-    max-height: 8rem;
-    object-fit: cover;
-    
+    width: 100%;
+    height: 8rem;
+    overflow: hidden;
+    position: relative;
 }
 
-.common-frame img{
+.hyrule-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.common-frame {
     outline: 0.12rem solid #B99F65;
 }
 
-.rare-frame img{
+.rare-frame {
     outline: 0.12rem solid #7CD2FF;
 }
 
-.epic-frame img{
+.epic-frame {
     outline: 0.12rem solid #BA6ED5;
 }
 
 .hyrule-card__content {
     padding-inline:  0rem;
     justify-content: center;
-    position: relative;
     width: 100%;
-    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
 
 }
 
@@ -119,38 +116,37 @@
     width: 13rem;
     position: absolute;
     margin: auto;
-    top: 0;
+    top: 50%;
     bottom: 1;
-    right: 0;
-    left: 0;
-    z-index: 0; /* Fondo */
+    left: 50%;
+    z-index: 0;
+    transform: translate(-50%, -50%);
 }
 
 .hyrule-card__content__info {
-    width: 11rem;
-    position: absolute;
-    margin: auto;
-    margin-top: 0.68rem;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    width: 90%;
     z-index: 1;
+    position: relative;
 }
 
 .hyrule-card__description {
     font-size: 0.7rem;
-    font-family: "Inknut Antiqua", serif;
     color: #97DCFF;
     text-align: center;
     text-shadow: 0px 0px 3px #5BB3FB;
     font-style: normal;
     line-height: 0.8rem;
+    display: -webkit-box;
 }
 
 .hyrule-card__description p {
     margin-block: 0.2rem;
-    font-size: 0.6rem;
+    font-size: 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .hyrule-card__section h3 {
@@ -168,13 +164,17 @@
 }
 .hyrule-card__section p {
     font-size: 0.6rem;
-    font-family: "Inknut Antiqua", serif;
     color: #97DCFF;
     text-align: center;
     text-shadow: 0px 0px 3px #5BB3FB;
     font-style: normal;
-    line-height: 0.8rem;
+    line-height: 4px;
     margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .hyrule-card__footer {
@@ -183,41 +183,19 @@
     color: #B99F65;
     font-family: 'title';
     padding-top: 0.8rem;
-    font-family: "Inknut Antiqua", serif;
     font-weight: 600;
     font-style: normal;
     line-height: 0.3;
     margin-bottom: 0.15rem;
 }
 
-
-  /* size */
-
-.card--lg {
-    transform: scale(1.5);
-    transform-origin: center;
-}
-
-.card--xl {
-    transform: scale(2.4);
-    z-index: 9999;
-    box-shadow: 0 0 20px rgba(0,0,0,0.6);
-}
-
-/* disableclick */
-
 .card--disabled {
-  /* pointer-events: none; */
   cursor: pointer;
-  /* opacity: 0.7; */
 }
-
-/* isDiscovered */
 
 .collection-page .hidden-card .hyrule-card {
     display: none;
 }
-
 
 .collection-page .hidden-card {
     background-image: url('../../assets/backgrounds/no-available-card.png');
@@ -228,4 +206,86 @@
     pointer-events: none !important;
 }
 
+@media (max-width: 750px) {
+    body:not(.slider-page) .hyrule-card__border {
+        width: 13rem;
+        height: 19rem; 
+    }
 
+    body:not(.slider-page) .hyrule-card__content__frame {
+        width: 11.5rem;
+    }
+
+    body:not(.slider-page) .hyrule-card__image {
+        height: 7rem;
+    }
+}
+
+@media (max-width: 550px) {
+    body:not(.slider-page) .hyrule-card__border {
+        width: 9.2rem;
+        height: 14rem; 
+        border-radius: 3px;
+    }
+
+    body:not(.slider-page) .hyrule-card {
+        width: calc(100% - 5px);
+        height: calc(100% - 5px);
+        border-radius: 0.2rem;
+            padding: 0.2rem 0.4rem;
+    }
+
+    body:not(.slider-page) .hyrule-card__content__frame {
+        width: 8rem;
+    }
+    body:not(.slider-page) .hyrule-card__content {
+        margin-top: 0;
+    }
+
+    body:not(.slider-page) .hyrule-card__image {
+        height: 5.1rem;
+        width: 95%;
+        border-radius: 2px;
+        margin-top: -8px;
+    }
+
+    body:not(.slider-page) .hyrule-card__header {
+        margin-top: 2px;
+    }
+    body:not(.slider-page) .hyrule-card__header .h2 {
+        font-size: 7px;
+        line-height: 0;
+    }
+    body:not(.slider-page) .hyrule-card__points {
+        font-size: 4px;
+    }
+    body:not(.slider-page) .hyrule-card__icon {
+        width: 6px;
+    }
+
+    body:not(.slider-page) .hyrule-card__description {
+        line-height: 4px;
+    }
+    body:not(.slider-page) .hyrule-card__description p {
+        font-size: 3px;
+    }
+    body:not(.slider-page) .hyrule-card__section h3 {
+        font-size: 6px;
+        padding-top: 1px;
+        line-height: 0.9;
+    }
+    body:not(.slider-page) .hyrule-card__section p {
+        font-size: 3px;
+    }
+
+    body:not(.slider-page) .hyrule-card__footer {
+        padding-top: 3px;
+        font-size: 4px;
+    }
+
+    body:not(.slider-page) .hyrule-card__content__info {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+}

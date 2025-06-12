@@ -3,8 +3,9 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
-    margin-top: 4rem;
+    gap: 6rem;
+    margin-top: 7rem;
+    overflow: visible;
 }
 
 .store-main__textbox__text {
@@ -22,7 +23,7 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    margin-top: 2.5rem;
+    margin-top: 5.6rem;
     justify-content: center;
 }
 
@@ -31,3 +32,47 @@
     margin-top: 2rem;
     gap: 2.5rem
 }
+
+.store-main:not(.dragging) .card-content {
+    cursor: pointer;
+}
+
+.store-main.dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+    @media (max-width: 764px) {
+        .store-page {
+            margin-top: 10rem;
+        }
+        .store-main {
+            display: flex;
+            overflow-x: auto;
+            padding: 3rem 7rem;
+            justify-content: unset;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-x;
+            gap: 1.6rem;
+            scroll-padding-inline: 1rem;
+            scrollbar-width: none;
+            user-select: none;
+            padding-inline: 6rem;
+            margin-top: 1rem;
+        }
+
+        .store-main .card-content {
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .store-main .card-content.active {
+            transform: scale(0.9);
+        }
+
+        .store-main__textbox {
+            margin-top: 0;
+        }
+    }
+

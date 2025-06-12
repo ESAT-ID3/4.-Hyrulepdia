@@ -1,27 +1,46 @@
 header {
-  display: flex;
-  justify-content: space-between;
+  position: sticky;
+  top: 22px;
+  z-index: 9999;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
   align-items: center;
   padding: 25px 80px;
-  background: rgba(39, 88, 128, 0.1); 
-  position: relative;
+   background: radial-gradient(circle, #16334b, #000000);
+  gap: 6px;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  will-change: transform;
 }
- 
+
+.header--visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.header--hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
 .header-logo {
-  font-size: 36px;
+  font-size: clamp(1.5rem, 0.9761rem + 1.1191vw, 2.375rem);
   text-decoration: none;
   color: #E0CEA0;
 }
 
+.header-logo__mobile {
+  display: none;
+}
+
 .header-content {
   display: flex;
-  gap: 10px;
+  justify-content: end;
+  gap: 56px;
 }
 
 .header-nav {
   display: flex;
   gap: 26px;
-  margin-right: 100px;
   align-items: center;
 }
 
@@ -30,11 +49,11 @@ header {
   color: #FFFFFF;
   font-weight: 500;
   font-size: 20px;
-  font-family: 'the wild breath of Zelda';
+  font-family: 'title';
 }
 
-nav a:hover {
-  filter: drop-shadow(0 0 10px #FFFFFF );
+nav a.active {
+  filter: drop-shadow(0 0 10px #FFFFFF);
 }
 
 .user-money {
@@ -45,8 +64,65 @@ nav a:hover {
 
 .user-money p {
   color: #FFFFFF;
-  font-size: 20px;
+  font-size: 16px;
 }
 
+/* ---------------- MOBILE STYLES ---------------- */
 
+@media (max-width: 1124px) {
+  #root {
+    margin-bottom: 2rem;
+  }
+  header {
+    position: unset;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgb(14, 40, 61);
+    padding: 16px 20px;
+    z-index: 10000;
+    transform: none !important;
+    opacity: 1 !important;
+  }
 
+  .header-logo {
+    display: block;
+    width: 40px;
+    height: auto;
+  }
+
+  .header-content {
+    gap: 36px;
+  }
+
+  .img-rupia {
+    width: 20px;
+    height: 20px;
+  }
+
+  .user-money p {
+    font-size: clamp(1.5rem, 0.9761rem + 1.1191vw, 2.375rem);
+  }
+
+  .header-nav.mobile-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgb(13, 31, 46);
+    padding: 10px 0;
+    justify-content: space-around;
+    z-index: 2;
+    gap: 0;
+    height: 42px;
+    display: flex;
+  }
+
+  html {
+    padding-bottom: 52px;
+  }
+}
+
+.modal-open .header {
+  display: none;
+}
