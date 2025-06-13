@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
-import { getAllCards } from "../../services/getAllCards";
-import { HyruleCard } from "../hyrule-card/HyruleCard";
-import { HyruleCardType } from "../../types/hyrule.types";
-import { Filters } from "../filters/filters";
-import { useFilters } from "../../hooks/useFilters";
-import { CardCounter } from "../cardCounter/CardCounter";
-import { ModalCard } from "../modalCard/ModalCard";
-import { Button } from "../button/button.tsx";
-import { useNavigate } from "react-router-dom";
-import { CollectionFavorites } from "../../hooks/useCollectionFavorites.ts";
-import { useUserCollection } from "../../hooks/useUserCollection";
-import loadingGif from '../../assets/gif-zelda-loading.webp'
-import { FilterModal } from "../filterModal/FilterModal.tsx";
+import { useEffect, useState } from 'react';
+import { getAllCards } from '../../services/getAllCards';
+import { HyruleCard } from '../hyrule-card/HyruleCard';
+import { HyruleCardType } from '../../types/hyrule.types';
+import { Filters } from '../filters/filters';
+import { useFilters } from '../../hooks/useFilters';
+import { CardCounter } from '../cardCounter/CardCounter';
+import { ModalCard } from '../modalCard/ModalCard';
+import { Button } from '../button/button.tsx';
+import { useNavigate } from 'react-router-dom';
+import { CollectionFavorites } from '../../hooks/useCollectionFavorites.ts';
+import { useUserCollection } from '../../hooks/useUserCollection';
+import loadingGif from '../../assets/gif-zelda-loading.webp';
+import { FilterModal } from '../filterModal/FilterModal.tsx';
 
 import '../hyrule-card/hyruleCard.css';
-import './collection-all.css'
-import '../cardCounter/card-counter.css'
-import '../modalCard/modal-card.css'
-import '../filterModal/filter-modal.css'
+import './collection-all.css';
+import '../cardCounter/card-counter.css';
+import '../modalCard/modal-card.css';
+import '../filterModal/filter-modal.css';
 
 interface CollectionAllProps {
   variant?: 'default' | 'library';
@@ -28,45 +28,46 @@ export const CollectionAll = ({ variant = 'default' }: CollectionAllProps) => {
   const [favoriteCards, setFavoriteCards] = useState<HyruleCardType[]>([]);
   const [isShowingFavorites, setIsShowingFavorites] = useState(false);
   const [selectedCard, setSelectedCard] = useState<HyruleCardType | null>(null);
-  const [isPageReady, setIsPageReady] = useState(false);
   const [loadingCards, setLoadingCards] = useState(true);
-  const [hasAttemptedLoad, setHasAttemptedLoad] = useState(false);
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
-  const { userCards, loading: loadingUserCards, error: userCardsError } = useUserCollection();
-  const { favoriteIds, favoriteCards: fetchedFavoriteCards } = CollectionFavorites(isShowingFavorites);
+  const {
+    userCards,
+    loading: loadingUserCards,
+    error: userCardsError,
+  } = useUserCollection();
+  const { favoriteIds, favoriteCards: fetchedFavoriteCards } =
+    CollectionFavorites(isShowingFavorites);
   const navigate = useNavigate();
   const isStillLoading = loadingUserCards || loadingCards;
-  
 
   // Cargar todas las cartas
-useEffect(() => {
-  const fetchData = async () => {
-    setLoadingCards(true);
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoadingCards(true);
 
-    const allCards = await getAllCards();
+      const allCards = await getAllCards();
 
-    if (allCards) {
- const markedCards = allCards.map(card => {
-  const userCard = userCards.find(c => c.id === card.id);
+      if (allCards) {
+        const markedCards = allCards.map((card) => {
+          const userCard = userCards.find((c) => c.id === card.id);
 
-  return {
-    ...card,
-    isDiscovered: !!userCard,
-    rarity: userCard?.rareza || 'common'
-  };
-});
+          return {
+            ...card,
+            isDiscovered: !!userCard,
+            rarity: userCard?.rareza || 'common',
+          };
+        });
 
-      setCards(markedCards);
+        setCards(markedCards);
+      }
+      setLoadingCards(false);
+    };
+
+    if (userCards.length >= 0) {
+      fetchData();
     }
-    setLoadingCards(false);
-    
-  };
-
-  if (userCards.length >= 0) {
-    fetchData();
-  }
-}, [userCards]);
+  }, [userCards]);
 
   // Actualizar cartas favoritas
   useEffect(() => {
@@ -75,51 +76,55 @@ useEffect(() => {
     }
   }, [fetchedFavoriteCards]);
 
- 
   // Aplicar filtros. Para 'library' mostramos todas sin filtrar por isDiscovered, para el resto sí filtramos.
-  const filtersForAll = useFilters(cards, variant === "library");
+  const filtersForAll = useFilters(cards, variant === 'library');
   const filtersForFavorites = useFilters(favoriteCards);
 
-const {
-  filteredCards,
-  setFilterRarity,
-  setFilterCategory,
-  setSearchQuery,
-  setIsReversed,
-} = isShowingFavorites ? filtersForFavorites : filtersForAll;
+  const {
+    filteredCards,
+    setFilterRarity,
+    setFilterCategory,
+    setSearchQuery,
+    setIsReversed,
+  } = isShowingFavorites ? filtersForFavorites : filtersForAll;
 
   const handleFavoritesToggle = () => {
-    setIsShowingFavorites(prev => !prev);
+    setIsShowingFavorites((prev) => !prev);
   };
 
   const handleRemoveFavoriteLocally = (id: number) => {
-    setFavoriteCards(prev => prev.filter(card => card.id !== id));
+    setFavoriteCards((prev) => prev.filter((card) => card.id !== id));
   };
 
   // Decide qué cartas mostrar según el modo y filtros
-  const cardsToDisplay = isShowingFavorites ? filtersForFavorites.filteredCards.filter(card => card.isDiscovered) : (variant === "library" ? filtersForAll.filteredCards : filteredCards);
+  const cardsToDisplay = isShowingFavorites
+    ? filtersForFavorites.filteredCards.filter((card) => card.isDiscovered)
+    : variant === 'library'
+    ? filtersForAll.filteredCards
+    : filteredCards;
 
-    if (isPageReady) {
-      return (
-        <div className="collection-container loading">
-          <img src={loadingGif} alt="Cargando..." className="loading-gif" />
-        </div>
+  if (isPageReady) {
+    return (
+      <div className='collection-container loading'>
+        <img src={loadingGif} alt='Cargando...' className='loading-gif' />
+      </div>
     );
-}
+  }
 
   if (!userCards) {
     return (
       <div>
         <p>Looks like Link forgot to pick up your cards. Typical</p>
       </div>
-    )
+    );
   }
 
-  if (userCardsError) return <p>Error cargando cartas del usuario: {userCardsError}</p>;
+  if (userCardsError)
+    return <p>Error cargando cartas del usuario: {userCardsError}</p>;
 
   return (
     <>
-      <FilterModal   
+      <FilterModal
         open={isFilterModalOpen}
         onClose={() => setIsFilterModalOpen(false)}
         onFilterTypesChange={setFilterRarity}
@@ -128,8 +133,7 @@ const {
         setIsReversed={setIsReversed}
         onFavoritesToggle={handleFavoritesToggle}
         isShowingFavorites={isShowingFavorites}
-        > 
-      </FilterModal>
+      ></FilterModal>
       <Filters
         onFilterTypesChange={setFilterRarity}
         onFilterCategoryChange={setFilterCategory}
@@ -139,45 +143,55 @@ const {
         isShowingFavorites={isShowingFavorites}
         onOpenFiltersModal={() => setIsFilterModalOpen(true)}
       />
-      <div className="collection-page">
-        <div className="collection-page__buttons">
-          <Button onClick={() => navigate("/collection")} size="lg">My Cards</Button>
-          <Button onClick={() => navigate("/collection/decks")} size="lg">Decks</Button>
-          <Button onClick={() => navigate("/collection/library")} size="lg">Library</Button>
+      <div className='collection-page'>
+        <div className='collection-page__buttons'>
+          <Button onClick={() => navigate('/collection')} size='lg'>
+            My Cards
+          </Button>
+          <Button onClick={() => navigate('/collection/decks')} size='lg'>
+            Decks
+          </Button>
+          <Button onClick={() => navigate('/collection/library')} size='lg'>
+            Library
+          </Button>
         </div>
-        <div className="cards-wrapped">
+        <div className='cards-wrapped'>
           <CardCounter
             obtained={
-              variant === "library"
-                ? filteredCards.filter(card => card.isDiscovered).length
+              variant === 'library'
+                ? filteredCards.filter((card) => card.isDiscovered).length
                 : filteredCards.length
             }
             total={cards.length}
           />
-          <div className="collection-container">
+          <div className='collection-container'>
             {isStillLoading ? (
-                <div className="loading-container">
-                  <img src={loadingGif} alt="Loading cards..." className="loading-gif" />
-                </div>
-              ) : cardsToDisplay.length === 0 && hasAttemptedLoad ? (
-                <div className="no-cards-message">
-                  <p>Looks like Link forgot to pick up your cards. Typical.</p>
-                </div>
-              ) : (
-            cardsToDisplay.map((card) => (
-              <div
-                className="card-container"
-                key={card.id}
-                onClick={
-                  card.isDiscovered ? () => setSelectedCard(card) : undefined
-                }
-              >
-                <HyruleCard
-                  {...card}
-                  disableClick={variant === "library"} // solo se desactiva click en la biblioteca
+              <div className='loading-container'>
+                <img
+                  src={loadingGif}
+                  alt='Loading cards...'
+                  className='loading-gif'
                 />
               </div>
-            ))
+            ) : cardsToDisplay.length === 0 && hasAttemptedLoad ? (
+              <div className='no-cards-message'>
+                <p>Looks like Link forgot to pick up your cards. Typical.</p>
+              </div>
+            ) : (
+              cardsToDisplay.map((card) => (
+                <div
+                  className='card-container'
+                  key={card.id}
+                  onClick={
+                    card.isDiscovered ? () => setSelectedCard(card) : undefined
+                  }
+                >
+                  <HyruleCard
+                    {...card}
+                    disableClick={variant === 'library'} // solo se desactiva click en la biblioteca
+                  />
+                </div>
+              ))
             )}
           </div>
         </div>
