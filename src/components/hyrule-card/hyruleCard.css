@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
+
 .hyrule-card__border {
     display: flex;
     justify-content: center;
@@ -41,12 +43,13 @@
 
 .hyrule-card__header {
     margin-inline: 0.95rem;
+    margin-top: 0.25rem;
     display: flex;
     justify-content: space-between;
     align-items: center; /*hace que el título y los puntos se alinen horizontalmente*/
     font-family: 'title';
     font-size: 0.82rem;
-    margin-bottom: 0.1rem;
+    margin-bottom: 0;
     color: #f5e5c0;
     width: 100%;
 }
@@ -54,6 +57,7 @@
 .hyrule-card__type {
     display: flex;
     align-items: center;
+    margin-bottom: 0.2rem;
 }
 
 .hyrule-card__icon {
@@ -65,6 +69,9 @@
 
 .hyrule-card__header .h2 {
     font-size: 1.2rem;
+    line-height: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
     color: #f5e5c0;
 }
 
@@ -86,7 +93,7 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    display: block;
+    display: block; 
 }
 
 .common-frame {
@@ -109,7 +116,6 @@
     display: flex;
     align-items: center;
     margin-top: 10px;
-
 }
 
 .hyrule-card__content__frame {
@@ -137,16 +143,19 @@
     font-style: normal;
     line-height: 0.8rem;
     display: -webkit-box;
+    font-family: "Inknut Antiqua", serif;
 }
 
 .hyrule-card__description p {
-    margin-block: 0.2rem;
+    margin-bottom: 0.2rem;
     font-size: 0.5rem;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 0.85rem;
+    font-family: "Inknut Antiqua", serif;
 }
 
 .hyrule-card__section h3 {
@@ -155,7 +164,8 @@
     font-family: 'title';
     margin: 0;
     line-height: 1rem;
-    padding-top: 0.5rem;
+    padding-top: 0.55rem;
+    padding-bottom: 0.2rem;
     text-align: center;
 }
 
@@ -163,7 +173,7 @@
     margin: 0;
 }
 .hyrule-card__section p {
-    font-size: 0.6rem;
+    font-size: 0.5rem;
     color: #97DCFF;
     text-align: center;
     text-shadow: 0px 0px 3px #5BB3FB;
@@ -175,6 +185,7 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-family: "Inknut Antiqua", serif;
 }
 
 .hyrule-card__footer {
@@ -206,6 +217,14 @@
     pointer-events: none !important;
 }
 
+.hyrule-card__content__info {
+    margin-bottom: 0.25rem;
+}
+
+.hyrule-card__content__info p {
+    margin-bottom: 0.2rem;
+}
+
 @media (max-width: 750px) {
     body:not(.slider-page) .hyrule-card__border {
         width: 13rem;
@@ -218,6 +237,24 @@
 
     body:not(.slider-page) .hyrule-card__image {
         height: 7rem;
+    }
+
+    body:not(.slider-page) .hyrule-card__description p {
+        font-size: 4px;
+        margin-bottom: 3px;
+        line-height: 7px;
+    }
+
+     body:not(.slider-page) .hyrule-card__section h3 {
+        padding-top: 0.1rem;
+        padding-bottom: 0.1rem;
+        font-size: 8px;
+    }
+
+    body:not(.slider-page) .hyrule-card__section p {
+        line-height: 6px;
+        font-size: 4px;
+        padding-bottom: 1px;
     }
 }
 
@@ -232,7 +269,7 @@
         width: calc(100% - 5px);
         height: calc(100% - 5px);
         border-radius: 0.2rem;
-            padding: 0.2rem 0.4rem;
+        padding: 0.2rem 0.4rem;
     }
 
     body:not(.slider-page) .hyrule-card__content__frame {
@@ -251,6 +288,7 @@
 
     body:not(.slider-page) .hyrule-card__header {
         margin-top: 2px;
+        margin-bottom: 6px;
     }
     body:not(.slider-page) .hyrule-card__header .h2 {
         font-size: 7px;
@@ -268,14 +306,18 @@
     }
     body:not(.slider-page) .hyrule-card__description p {
         font-size: 3px;
+        line-height: 6px;
+        margin-bottom: 0;
+        margin-top: 3px;
     }
     body:not(.slider-page) .hyrule-card__section h3 {
-        font-size: 6px;
+        font-size: 5px;
         padding-top: 1px;
-        line-height: 0.9;
+        line-height: 0.2rem;
     }
     body:not(.slider-page) .hyrule-card__section p {
         font-size: 3px;
+        margin-bottom: 0;
     }
 
     body:not(.slider-page) .hyrule-card__footer {
@@ -287,5 +329,11 @@
         display: flex;
         flex-direction: column;
         gap: 3px;
+    }
+
+    body:not(.slider-page) .hyrule-card__image {
+        width: 100%;
+        aspect-ratio: 63/40;
+        margin-bottom: 3px;
     }
 }

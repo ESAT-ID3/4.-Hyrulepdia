@@ -137,6 +137,7 @@
     font-weight: 100;
     color: #E0CEA0;
     letter-spacing: 0.1rem;
+    padding-bottom: 1rem;
 }
 
 /*para botón de eliminar deck*/
@@ -154,7 +155,7 @@
   color: red
 }
 
-@media (max-width: 768px) {
+@media (max-width: 548px) {
   .card-selection {
     min-height: 500px;
     min-width: 200px;
@@ -168,7 +169,7 @@
   .card-slot-button {
     overflow: visible; /* importante para que lo que esté fuera del botón se vea */
     width: 10rem;
-    aspect-ratio: 9.9 / 14.6; /* proporción similar a las cartas reales */
+    height: 14.75rem; /* proporción similar a las cartas reales */
     background-color:rgb(14, 23, 40);
     border: 2px dashed #97DCFF;
     border-radius: 8px;
@@ -181,6 +182,10 @@
     justify-content: center;
     overflow: hidden;
     padding: 0.25rem;
+  }
+
+  .card-slot-grid {
+    gap: 2rem;
   }
 
 }

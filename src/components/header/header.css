@@ -65,6 +65,7 @@ nav a.active {
 .user-money p {
   color: #FFFFFF;
   font-size: 16px;
+  font-family: 'title';
 }
 
 /* ---------------- MOBILE STYLES ---------------- */

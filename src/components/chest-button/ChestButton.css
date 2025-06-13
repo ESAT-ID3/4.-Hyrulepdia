@@ -11,6 +11,10 @@
     transition: transform 0.3s ease;
 }
 
+span {
+    font-family: 'title';
+}
+
 .chest-button:hover {
     transform: scale(1.06);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
@@ -25,12 +29,13 @@
     height: 100%;
 }
 
-.chest-button h1, h2{
+.chest-button h1, .chest-button h2{
     color: #ffffff;
     text-align: center;
     font-weight: 200;
     letter-spacing: 0.05rem;
     font-size: 2rem;
+    font-family: "title", serif;
 }
 
 .chest-button__span {
@@ -80,6 +85,7 @@
 .chest-price__content p {
     font-size: 18px;
     color: white;
+    font-family: "title", serif;
 }
 
     @media (max-width: 1124px) {

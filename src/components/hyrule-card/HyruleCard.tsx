@@ -86,7 +86,7 @@ export const HyruleCard = ({
                         </div>
                         <div className='hyrule-card__section'>
                             <h3>Droppable Items</h3>
-                            <p>{items}</p>
+                            <p className='hyrule-card__section__p'>{items}</p>
                         </div>
                     </div>
                 </div>

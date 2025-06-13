@@ -27,6 +27,13 @@ a {
 }
 
 @font-face {
+  font-family: "title"; /* Este es el nombre personalizado que usarás en tu CSS */
+  src: url("./fonts/the-wild-breath-of-zelda.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
   font-family: "The Wild Breath of Zelda";
   src: url("./fonts/the-wild-breath-of-zelda.ttf");
 }
