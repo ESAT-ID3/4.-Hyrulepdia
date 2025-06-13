@@ -103,14 +103,6 @@ export const CollectionAll = ({ variant = 'default' }: CollectionAllProps) => {
     ? filtersForAll.filteredCards
     : filteredCards;
 
-  if (isPageReady) {
-    return (
-      <div className='collection-container loading'>
-        <img src={loadingGif} alt='Cargando...' className='loading-gif' />
-      </div>
-    );
-  }
-
   if (!userCards) {
     return (
       <div>
@@ -173,7 +165,7 @@ export const CollectionAll = ({ variant = 'default' }: CollectionAllProps) => {
                   className='loading-gif'
                 />
               </div>
-            ) : cardsToDisplay.length === 0 && hasAttemptedLoad ? (
+            ) : cardsToDisplay.length === 0 ? (
               <div className='no-cards-message'>
                 <p>Looks like Link forgot to pick up your cards. Typical.</p>
               </div>
