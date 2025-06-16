@@ -54,6 +54,7 @@ header {
 
 nav a.active {
   filter: drop-shadow(0 0 10px #FFFFFF);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .user-money {
@@ -122,6 +123,10 @@ nav a.active {
 
   html {
     padding-bottom: 52px;
+  }
+
+    nav a.active {
+    filter: none; /* anula el efecto visual en mobile */
   }
 }
 
