@@ -5,12 +5,12 @@ import cardFrame from '../../assets/decorations/card-frame.svg';
 import cardFrameBlue from '../../assets/decorations/card-frame-blue.svg';
 import cardFramePurple from '../../assets/decorations/card-frame-purple.svg';
 import { useCardTilt } from '../../hooks/useCardTilt';
-import monstersIcon from '../../assets/icons/monsters-icon.svg';
 import creaturesIcon from '../../assets/icons/creatures-icon.svg';
 import materialsIcon from '../../assets/icons/materials-icon.svg';
 import treasureIcon from '../../assets/icons/treasure-icon.svg';
 import equipmentIcon from '../../assets/icons/equipment-icon.svg';
 import { HyruleCardType } from '../../types/hyrule.types';
+import { MonstersIcon } from '../icons/MonstersIcon';
 
 type TiltStyle = {
   transform?: string;
@@ -21,7 +21,7 @@ type TiltStyle = {
 const displayIcon = (category: HyruleCardType['category']) => {
     switch (category) {
         case 'monsters':
-            return <img className='hyrule-card__icon' src={monstersIcon} alt='monsters icon' />;
+            return <MonstersIcon className="hyrule-card__icon" />;
         case 'creatures':
             return <img className='hyrule-card__icon' src={creaturesIcon} alt='creatures icon' />;
         case 'materials':
