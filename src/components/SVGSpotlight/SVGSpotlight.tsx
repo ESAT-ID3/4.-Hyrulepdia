@@ -50,7 +50,7 @@ const SVGSpotlight: React.FC = () => {
 
         if (dist < MAX_DIST) {
           const norm = 1 - dist / MAX_DIST;
-          const brightness = 0.3 + norm * 1.2;
+          const brightness = 0.3 + norm * 0.5;
           const shadow = norm * 10;
           tile.style.filter = `brightness(${brightness}) drop-shadow(0 0 ${shadow}px turquoise)`;
           tile.style.opacity = `${norm}`;
