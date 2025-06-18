@@ -26,6 +26,11 @@
   width: auto;
 }
 
+.register-input input {
+    padding: 10px 0;
+    text-transform: none; 
+}
+
 .button-register {
   margin-top: 26px;
 }
@@ -36,7 +41,15 @@
   gap: 28px;;
 }
 
+
+
 .register-form-container {
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 749px) {
+  .register-logo__img {
+    max-width: 300px;
+  }
 }

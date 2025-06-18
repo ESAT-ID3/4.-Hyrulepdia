@@ -44,7 +44,7 @@
 
     @media (max-width: 764px) {
         .store-page {
-            margin-top: 10rem;
+            margin-top: 2rem;
         }
         .store-main {
             display: flex;
@@ -53,7 +53,7 @@
             justify-content: unset;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
-            touch-action: pan-x;
+            touch-action: auto;            
             gap: 1.6rem;
             scroll-padding-inline: 1rem;
             scrollbar-width: none;

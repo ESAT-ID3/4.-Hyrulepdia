@@ -6,7 +6,7 @@ header {
   grid-template-columns: 1fr 3fr;
   align-items: center;
   padding: 25px 80px;
-   background: radial-gradient(circle, #16334b, #000000);
+  background: radial-gradient(circle, #16334b, #000000);
   gap: 6px;
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
   will-change: transform;
@@ -72,18 +72,19 @@ nav a.active {
 
 @media (max-width: 1124px) {
   #root {
-    margin-bottom: 2rem;
+    margin-bottom: 8rem;
   }
   header {
     position: unset;
     top: 0;
     left: 0;
     right: 0;
-    background: rgb(14, 40, 61);
+    background: radial-gradient(circle, #16334b, #000000);
     padding: 16px 20px;
-    z-index: 10000;
+    z-index: 20;
     transform: none !important;
     opacity: 1 !important;
+    margin-top: 10px;
   }
 
   .header-logo {
@@ -113,7 +114,7 @@ nav a.active {
     background: rgb(13, 31, 46);
     padding: 10px 0;
     justify-content: space-around;
-    z-index: 2;
+    z-index: 11;
     gap: 0;
     height: 42px;
     display: flex;
@@ -121,6 +122,10 @@ nav a.active {
 
   html {
     padding-bottom: 52px;
+  }
+
+  nav a.active {
+    filter: none; 
   }
 }
 

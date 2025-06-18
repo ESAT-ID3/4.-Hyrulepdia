@@ -1,0 +1,9 @@
+import React from 'react';
+
+export const CompetitionIcon = (props: React.SVGProps<SVGSVGElement>) => (
+<svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+<path d="M12 6.59L14.45 8.08L13.8 5.27L16 3.39L13.11 3.14L12 0.5L10.87 3.14L8 3.39L10.18 5.27L9.5 8.08L12 6.59ZM4 12.59L6.45 14.08L5.8 11.27L8 9.39L5.11 9.14L4 6.5L2.87 9.14L0 9.39L2.18 11.27L1.5 14.08L4 12.59ZM20 9.59L22.45 11.08L21.8 8.27L24 6.39L21.11 6.14L20 3.5L18.87 6.14L16 6.39L18.18 8.27L17.5 11.08L20 9.59ZM15 22.5H9V9.5H15V22.5ZM7 22.5H1V16.5H7V22.5ZM23 22.5H17V12.5H23V22.5Z" fill="#F8EED5"/>
+</svg>
+);
+
+

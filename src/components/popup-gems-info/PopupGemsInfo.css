@@ -78,6 +78,11 @@
     line-height: 2rem;
 }
 
+.modal-close-button {
+    background-color: #FF0048;
+    display: flex;
+}
+
 /* Responsive */
 
 @media (max-width: 749px) {

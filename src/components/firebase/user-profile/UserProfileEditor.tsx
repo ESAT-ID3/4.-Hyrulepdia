@@ -9,13 +9,16 @@ import {
 import { doc, updateDoc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../../../firebaseConfig/firebaseConfig';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './UserProfileEditor.module.css';
 import { Button } from '../../button/button';
 import imageCompression from 'browser-image-compression';
 import { toast } from 'react-toastify';
 
+
 export const UserProfileEditor = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const [currentPassword, setCurrentPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
@@ -58,9 +61,7 @@ export const UserProfileEditor = () => {
     }
 
     if (file.size > 550 * 1024) {
-      toast.error(
-        'La imagen no debe exceder los 550 KB después de la compresión.'
-      );
+      toast.error('La imagen no debe exceder los 550 KB después de la compresión.');
       return Promise.resolve(null);
     }
 
@@ -73,9 +74,7 @@ export const UserProfileEditor = () => {
 
       reader.onerror = () => {
         console.error('Error al leer el archivo con FileReader.');
-        toast.error(
-          'Ocurrió un error al cargar la imagen. Inténtalo de nuevo.'
-        );
+        toast.error('Ocurrió un error al cargar la imagen. Inténtalo de nuevo.');
         resolve(null);
       };
 
@@ -83,9 +82,7 @@ export const UserProfileEditor = () => {
     });
   };
 
-  const handleImageUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const imageFile = event.target.files?.[0];
     if (!imageFile) return;
 
@@ -103,17 +100,13 @@ export const UserProfileEditor = () => {
 
       if (dataUrl) {
         setPhotoURL(dataUrl);
-        toast.success(
-          '✅ Imagen lista para guardar. ¡No olvides hacer clic en "Guardar"!'
-        );
+        toast.success('✅ Imagen lista para guardar. ¡No olvides hacer clic en "Guardar"!');
       } else {
         toast.error('❌ No se pudo procesar la imagen.');
       }
     } catch (error: any) {
       console.error('Error al procesar la imagen:', error);
-      toast.error(
-        `❌ Error al subir la imagen: ${error.message || 'Intenta de nuevo.'}`
-      );
+      toast.error(`❌ Error al subir la imagen: ${error.message || 'Intenta de nuevo.'}`);
     } finally {
       setLoadingImage(false);
     }
@@ -138,10 +131,7 @@ export const UserProfileEditor = () => {
           return;
         }
 
-        const credential = EmailAuthProvider.credential(
-          user.email!,
-          currentPassword
-        );
+        const credential = EmailAuthProvider.credential(user.email!, currentPassword);
         await reauthenticateWithCredential(auth.currentUser, credential);
         await updatePassword(auth.currentUser, password);
       }
@@ -158,14 +148,23 @@ export const UserProfileEditor = () => {
     } catch (err: any) {
       console.error('Error al guardar el perfil:', err);
       if (err.code === 'auth/requires-recent-login') {
-        toast.error(
-          '❌ Por favor, vuelve a iniciar sesión para actualizar tu email o contraseña.'
-        );
+        toast.error('❌ Por favor, vuelve a iniciar sesión para actualizar tu email o contraseña.');
       } else {
         toast.error(`❌ Error al guardar: ${err.message}`);
       }
     }
   };
+
+const handleLogout = async () => {
+  try {
+    // `logout` ahora devuelve una promesa que solo resuelve si el usuario confirma
+    await logout();
+    // Si el usuario confirma, navegamos a la ruta '/'
+    navigate('/');
+  } catch (error) {
+    console.error('Error al cerrar sesión:', error);
+  }
+};
 
   return (
     <div className={styles.containerProfile}>
@@ -219,10 +218,10 @@ export const UserProfileEditor = () => {
 
       <Button
         color='primary'
-        size='sm'
+        size='md'
         onClick={() => setShowSensitive((prev) => !prev)}
       >
-        {showSensitive ? 'Ocultar' : 'Editar'}
+        {showSensitive ? 'Hide' : 'Edit'}
       </Button>
 
       {showSensitive && (
@@ -241,7 +240,7 @@ export const UserProfileEditor = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={styles.inputText}
-              placeholder='Correo electrónico'
+              placeholder='Email'
             />
           </div>
 
@@ -258,7 +257,7 @@ export const UserProfileEditor = () => {
               type='password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder='Contraseña nueva'
+              placeholder='New Password'
               className={styles.inputText}
             />
           </div>
@@ -276,21 +275,30 @@ export const UserProfileEditor = () => {
               type='password'
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
-              placeholder='Contraseña actual'
+              placeholder='Current Password'
               className={styles.inputText}
             />
           </div>
         </>
       )}
-
+      <div className={styles.btnlogoutsave}>
       <Button
         color='primary'
-        size='sm'
+        size='md'
         onClick={handleSave}
         disabled={loadingImage}
       >
-        Guardar
+        Save
       </Button>
+
+      <Button
+        color='error'
+        size='md'
+        onClick={handleLogout}
+      >
+        Logout
+      </Button>
+      </div>
     </div>
   );
 };

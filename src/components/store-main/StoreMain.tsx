@@ -6,6 +6,7 @@ import './StoreMain.css';
 import { ChestButtonType } from '../../types/hyrule.types';
 import { PopupGemsInfo } from '../popup-gems-info/PopupGemsInfo';
 import { useHorizontalScroll } from '../../hooks/useHorizontalScroll';
+import SVGSpotlight from '../SVGSpotlight/SVGSpotlight';
 
 export const StoreMain = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -22,7 +23,7 @@ export const StoreMain = () => {
       const chestLeft = chest.offsetLeft;
       const chestWidth = chest.offsetWidth;
 
-      container.scrollLeft = chestLeft - (containerWidth / 2) + (chestWidth / 2);
+      container.scrollLeft = chestLeft - containerWidth / 2 + chestWidth / 2;
     }
   }, [scrollRef]);
 
@@ -38,29 +39,32 @@ export const StoreMain = () => {
 
   return (
     <div className='store-page'>
-      <div ref={scrollRef} className="store-main">
-        <div className="card-content" onClick={() => handleSelect('rare', 500)}>
-          <ChestButton rarity="rare" price={500} />
+      <div ref={scrollRef} className='store-main'>
+        <div className='card-content' onClick={() => handleSelect('rare', 500)}>
+          <ChestButton rarity='rare' price={500} />
         </div>
         <div
           ref={middleChestRef}
-          className="card-content"
+          className='card-content'
           onClick={() => handleSelect('common', 200)}
         >
-          <ChestButton rarity="common" price={200} />
+          <ChestButton rarity='common' price={200} />
         </div>
-        <div className="card-content" onClick={() => handleSelect('epic', 800)}>
-          <ChestButton rarity="epic" price={800} />
+        <div className='card-content' onClick={() => handleSelect('epic', 800)}>
+          <ChestButton rarity='epic' price={800} />
         </div>
       </div>
-      <div className="store-main__textbox">
-        <p className="store-main__textbox__text">Select a chest to continue...</p>
-        <div className="store-main__textbox__buttons">
+      <div className='store-main__textbox'>
+        <p className='store-main__textbox__text'>
+          Select a chest to continue...
+        </p>
+        <div className='store-main__textbox__buttons'>
           <Button onClick={() => navigate('/collection')}>COLLECTION</Button>
           <Button onClick={() => setShowPopup(true)}>MORE GEMS</Button>
         </div>
       </div>
       <PopupGemsInfo visible={showPopup} onClose={() => setShowPopup(false)} />
+      <SVGSpotlight />
     </div>
   );
 };

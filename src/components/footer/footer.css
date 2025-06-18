@@ -1,38 +1,53 @@
-/*ELEMENTOS NECESARIOS PARA QUE EL FOOTER ESTE ABAJO*/
-/* {
-  margin: 0;
-  box-sizing: border-box;
-  font-family: Geist;
-}
-body {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  min-height: 100vh;
-}*/
 .footer {
-  color: white;
   width: 100%;
-  position: relative;
-  padding: 25px 4vw 20px;
+  padding: 80px 4vw 20px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  gap: 52.76vw; /* espacio entre copyright y bloque de links */
-}
-
-/* Espacio entre cada link dentro del bloque */
-.footerLinks {
-  display: flex;
-  gap: 1.354vw;
-}
-
-.footerLink {
-  font-size: 16px;
-  text-decoration: none;
-  color: white;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  margin-top: auto;
+  font-size: 12px;
 }
 
 .copyRight {
-  font-size: 16px;
+  color: white;
+}
+
+.footerLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footerLink {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s;
+}
+
+.footerLink:hover {
+  color: #7cd2ff;
+}
+
+.copyRight {
+  margin-bottom: 10px;
+}
+
+/* 🌐 Responsive - para pantallas pequeñas */
+@media screen and (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .footerLinks {
+    justify-content: center;
+  }
+
+  .copyRight {
+    margin-bottom: 0;
+  }
 }

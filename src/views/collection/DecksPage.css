@@ -121,3 +121,19 @@
     gap: 1rem;
   }
 }
+
+@media (hover: none) {
+  .deck-button:active img,
+  .deck-preview:active {
+    transform: scale(1.05);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@media (max-width: 1123px) {
+  .collection-page__decks {
+    margin: 0 auto;
+    justify-content: center;
+    padding: 0 2rem; /* opcional: margen interno */
+  }
+}

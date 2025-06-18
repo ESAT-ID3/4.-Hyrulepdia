@@ -3,8 +3,9 @@ import { useNavigate, Link } from 'react-router-dom';
 import './registerForm.css';
 import { Button } from '../../button/button';
 import { useAuth } from '../../../context/authContext';
-import { SearchBar } from '../../searchBar/SearchBar'; 
-import logo from '../../../assets/logo-login.svg'
+import { SearchBar } from '../../searchBar/SearchBar';
+import logo from '../../../assets/logo-login.svg';
+import SVGSpotlight from '../../SVGSpotlight/SVGSpotlight';
 
 export const RegisterForm: FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -46,54 +47,60 @@ export const RegisterForm: FC = () => {
   return (
     <div className='register-form-container'>
       <form className='register-form' onSubmit={handleSubmit}>
-        <img src={logo} alt="logo"/>
-      <div className='register-input-content'>
-        <div className=''>
-          <SearchBar
-            id='email'
-            type='email'
-            value={email}
-            onSearch={setEmail}
-            required
-            placeholder='Email'
-            className='register-input'
-          />
-        </div>
+        <img src={logo} alt='logo' />
+        <div className='register-input-content'>
+          <div className=''>
+            <SearchBar
+              id='email'
+              type='email'
+              value={email}
+              onSearch={setEmail}
+              required
+              placeholder='Email'
+              className='register-input'
+            />
+          </div>
 
-        <div>
-          <SearchBar
-            id='password'
-            type='password'
-            value={password}
-            onSearch={setPassword}
-            required
-            placeholder='Password'
-            className='register-input'
-          />
-        </div>
+          <div>
+            <SearchBar
+              id='password'
+              type='password'
+              value={password}
+              onSearch={setPassword}
+              required
+              placeholder='Password'
+              className='register-input'
+            />
+          </div>
 
-        <div>
-          <SearchBar
-            id='confirmPassword'
-            type='password'
-            value={confirmPassword}
-            onSearch={setConfirmPassword}
-            required
-            placeholder='Confirm password'
-            className='register-input'
-          />
+          <div>
+            <SearchBar
+              id='confirmPassword'
+              type='password'
+              value={confirmPassword}
+              onSearch={setConfirmPassword}
+              required
+              placeholder='Confirm password'
+              className='register-input'
+            />
+          </div>
         </div>
-      </div>
 
         {error && <p className='error-message'>{error}</p>}
 
-        <Button className='button-register' type='submit' disabled={isSubmitting}>
-          {isSubmitting ? 'Creando cuenta...' : 'Crear cuenta'}
+        <Button
+          className='button-register'
+          type='submit'
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? 'Creating account...' : 'Create account'}
         </Button>
-          <p className="switch-form">Already have an account?
-          <Link to="/login">Go back to login</Link>
+        <p className='switch-form'>
+          Already have an account?
+          <Link to='/login'>Go back to login</Link>
         </p>
       </form>
+      <SVGSpotlight />
     </div>
   );
 };

@@ -7,7 +7,7 @@
   grid-template-rows: repeat(auto-fill, 100px);
   width: 100vw;
   height: 100vh;
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
 }
 

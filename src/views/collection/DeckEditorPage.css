@@ -10,6 +10,9 @@
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: manipulation; /* evita gestos inesperados */
   }
   
   /* Formulario principal del editor */
@@ -50,6 +53,8 @@
     gap: 1.2rem;
     width: 100%;
     max-width: 100%;
+    margin: 0 auto;
+    justify-content: center;
   }
   
   /* Botón de slot individual */
@@ -188,4 +193,19 @@
     gap: 2rem;
   }
 
+   .card-slot-button,
+  .user-card {
+    min-width: 48px;
+    min-height: 48px;
+  }
+
 }
+
+@media (max-width: 378px) {
+  .card-slot-grid {
+    justify-content: center;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+}
+

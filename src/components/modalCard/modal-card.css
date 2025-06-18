@@ -129,6 +129,12 @@
   transition: 0.3 ease-in-out;
 }
 
+body.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
 /* Responsive */
 
 @media (max-width: 748px) {
@@ -174,5 +180,4 @@
   .modal-description {
     padding: 0;
   }
-
 }

@@ -120,6 +120,10 @@ html {
 .no-cards-message {
     display: flex;
     align-items: center;
+    grid-column: span 3;
+    text-align: center;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .no-cards-message p {

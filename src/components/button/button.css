@@ -55,7 +55,7 @@
 
 .button.md {
     --cut-size: var(--cut-size-md);
-    height: 48px;
+    height: 38px;
     padding: 0 24px;
     font-size: 16px;
 }
@@ -250,11 +250,11 @@
     background-image: linear-gradient(45deg, transparent 0%, #ac0606 0% calc(100% - var(--cut-size)), transparent calc(100% - var(--cut-size)));
 
     &::before {
-        background-image: linear-gradient(45deg, transparent 0%, #FC0606 0% calc(100% - var(--cut-size)), transparent calc(100% - var(--cut-size)));
+        background-image: linear-gradient(45deg, transparent 0%, #FF0048 0% calc(100% - var(--cut-size)), transparent calc(100% - var(--cut-size)));
     }
 
     & .button-corner {
-        color: #FC0606;
+        color: #FF0048;
     }
 
     & .button-content .button-corner {
@@ -272,7 +272,7 @@
     }
 
     &:hover::before {
-        background-image: linear-gradient(45deg, transparent 0%, #FC0606 0% calc(100% - calc(var(--cut-size) + 4px)), transparent calc(100% - calc(var(--cut-size) + 4px)));
+        background-image: linear-gradient(45deg, transparent 0%, #FF0048 0% calc(100% - calc(var(--cut-size) + 4px)), transparent calc(100% - calc(var(--cut-size) + 4px)));
     }
 }
 

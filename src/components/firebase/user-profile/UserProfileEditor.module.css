@@ -1,11 +1,13 @@
 /*===CONTENEDOR DE LA PAGINA==*/
 .containerProfile {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 48px; /* distancia desde el header */
-  min-height: 100vh;
-  gap: 20px; /* separación general entre bloques si lo deseas */
+  padding-top: 48px;
+  gap: 20px;
+  bottom: 0;
+  left: 0;
 }
 
 /*===IMAGEN PERFIL USUARIO===*/
@@ -155,4 +157,15 @@ input {
   input {
     font-size: 13px;
   }
+}
+/*ESENCIAL PARA QUE EL FOOTER FUNCIONE BIEN*/
+.display-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.btnlogoutsave {
+  display: flex;
+  gap: 28px;
 }

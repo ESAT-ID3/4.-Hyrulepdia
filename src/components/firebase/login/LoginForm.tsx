@@ -44,7 +44,7 @@ export const LoginForm: React.FC = () => {
     <div className='login-page'>
       <div className='login-form-container'>
         <form className="login-form" onSubmit={handleSubmit}>
-          <img src={logo} alt="logo"/>
+          <img className='login-logo__img' src={logo} alt="logo"/>
           {error && <p className="error-message">{error}</p>}
           {message && <p className="success-message">{message}</p>}
             <div className='input-login-container'>
