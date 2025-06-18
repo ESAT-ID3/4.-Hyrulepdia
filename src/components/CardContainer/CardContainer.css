@@ -32,7 +32,7 @@
   right: 0;
   bottom: 0;
   background: url('src/assets/black 1.png') center/cover no-repeat;
-  opacity: 0.2; /* Opacidad de la imagen */
+  opacity: 0.9; /* Opacidad de la imagen */
   z-index: 0;
 }
 /* Overlay de color con opacidad */
@@ -42,7 +42,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(21, 40, 55, 0.2); /* Color dorado al 20% */
+  /*background-color: rgba(16, 33, 48, 0.9);*/
+  background-color: rgba(20, 44, 65, 0.9);
   z-index: 1;
 }
 
